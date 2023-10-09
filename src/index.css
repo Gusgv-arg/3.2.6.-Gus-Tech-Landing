@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 body {
 	margin: 0;
@@ -19,5 +22,132 @@ code {
 .active-link {
 	text-decoration: none;
 	font-weight: bold;
-  transition: color 0.2s ease-in-out;
+	transition: color 0.2s ease-in-out;
+}
+.homeContainer {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.scroll {
+	width: 700px;
+	height: 400x;
+	max-height: 400px;
+	border-radius: 10px;
+}
+.input-container {
+	position: relative;
+	width: 100%;
+	max-width: 750px;
+	margin-top: 0px;
+}
+.inputText {
+	width: 660px;
+	margin-left: 20px;		
+}
+.submit {
+	/* position: absolute; */
+	right: 0;
+	cursor: pointer;
+	margin-left: -50px;
+}
+input:focus {
+	outline: none;
+}
+
+li {
+	display: flex;
+}
+
+.assistant-role {
+	background-color: rgb(174, 186, 161);
+	color: rgb(15, 15, 59);
+	margin-bottom: 5px;
+	padding: 5px;
+}
+.user-role {
+	padding: 5px;
+	background-color: rgb(221, 225, 216);
+	color: black;
+}
+
+@keyframes blink {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+.inputText.typing {
+	animation: blink 1s infinite;
+	color: rgb(5, 5, 66);
+	font-weight: bolder;
+}
+.dataForm {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.dataForm p {
+	margin-bottom: 15px;
+	margin-top: -30px;
+}
+.inputForm {
+	margin-bottom: 10px;
+}
+.inputFormButton {
+	color: rgb(41, 8, 8);
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+.contactForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 80vh;
+}
+.contactInputForm {
+	margin-bottom: 10px;
+	width: 400px;
+}
+.contactFormButton {
+	margin-right: 10px;
+	margin-bottom: 30px;
+}
+.parrafo {
+	background-color: rgb(88, 40, 104);
+	color: white;
+	padding: 10px;
+}
+.contactos {
+	display: flex;
+	justify-content: right;
+	margin-right: 60px;
+}
+.contactos p {
+	padding: 10px;
+}
+.whatsapp {
+	color: green;
+	font-weight: bold;
+}
+.error404 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center; 
+	height: 100vh; 
+	color: red;
+	font-weight: bold;
+}
+.error404, h1{
+	margin-bottom: 20px;
+	font-size: 2rem;
 }
