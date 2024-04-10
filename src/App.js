@@ -41,7 +41,7 @@ export default function App() {
 									viewBox="0 0 32 32"
 									width="36"
 								/>
-								<p className="font-bold text-inherit ml-2"> ChatBot IA</p>
+								<p className="font-bold text-inherit ml-2">MegaBot</p>
 							</div>
 						</Link>
 					</NavbarBrand>

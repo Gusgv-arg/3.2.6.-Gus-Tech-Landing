@@ -1,7 +1,7 @@
 import React from 'react'
 import personaje from "../assets/Personaje.jpeg";
-import ChatGPT from './ChatGPT';
 import "animate.css"
+import MegaBot from './MegaBot';
 
 export const HomeScreen = () => {
 	return (
@@ -17,7 +17,7 @@ export const HomeScreen = () => {
 				/>
 			</div>
 			<div>
-				<ChatGPT />
+				<MegaBot />
 			</div>
 		</div>
 	)
