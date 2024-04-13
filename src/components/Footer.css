@@ -1,0 +1,13 @@
+.contactos {
+	display: flex;
+	justify-content: left;
+	margin: 0 6rem 0 ;
+    background-color: cadetblue;
+}
+.contactos p {
+	padding: 10px;
+}
+.whatsapp {
+	color: green;
+	font-weight: bold;
+}

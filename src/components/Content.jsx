@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "animate.css"
 import chatbot from "../assets/Chatbot con headphones fondo blanco.jpeg";
+import "./Content.css"
 
 export const Content = (props) => {
   const [printedContent, setPrintedContent] = useState([]);
+
+// For automatic scroll in the UI
+const messagesEndRef = React.useRef(null);
+const scrollToBottom = () => {
+  messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+};
+
 
   useEffect(() => {
     let intervalId;
@@ -35,54 +43,28 @@ export const Content = (props) => {
       }
     }
 
+    scrollToBottom()
     return () => {
       clearInterval(intervalId);
     };
   }, [props.messages]);
 
   return (
-    <div className="p-5 text-black animate__animated animate__fadeIn">
-      <p className="parrafo bg-black">
-        <strong>HOLA!</strong>
-        <br />
-        <br />
-        Soy un ChatBot de Inteligencia Artificial. Te invito a conversar haciendome las preguntas que creas necesarias para entender como los Chatbots de IA te pueden ayudar en tu negocio!
-        <br />
-        <br />
-        <strong>Ejemplos de Preguntas posibles:</strong>
-        <br />
-        ¿Qué beneficios trae implementar un Chatbot de IA?
-        <br />
-        ¿Cómo hace el Chatbot para saber sobre mi empresa?
-        <br />
-        ¿Cuáles son los casos de uso?
-        <br />
-        <br />
-        <strong>¡Preguntame! 👇</strong>
-      </p>
-      <br />
+    <>
+      
+      {props.messages?.map((chatMessage, index) => (
+        <div className={chatMessage.role === "user" ? "user-role" : "assistant-role"}
+          key={index}>
+          {chatMessage.role === "user" ? "" : <img
+            src={chatbot}
+            alt="chatbot"
+            className="chatbot-image"
+          />}
+          <span>{chatMessage.role === "assistant" && index === props.messages.length - 1 ? printedContent[index] : chatMessage.content}</span><br />
+        <div ref={messagesEndRef}/>
+        </div>
+      ))}
+    </>
 
-      <ul>
-        {props.messages?.map((chatMessage, index) => (
-          <li
-            flex
-            className={chatMessage.role === "user" ? "user-role" : "assistant-role"}
-            key={index}
-          >            
-            <p className="mr-2">
-              <strong>{chatMessage.role === "user" ? "Usuario:" : <img
-                src={chatbot}
-                alt="chatbot"
-                fill="none"
-                height="36"
-                viewBox="0 0 32 32"
-                width="36"                
-              />}</strong>
-            </p>
-            <p>{chatMessage.role === "assistant" && index=== props.messages.length - 1 ? printedContent[index] : chatMessage.content}</p><br/>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 };

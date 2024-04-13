@@ -1,0 +1,62 @@
+.chat-container{
+    width: fit-content;
+    /* background-color: rgb(193, 154, 97);  */
+    overflow: hidden;
+	position: relative;
+	height: 100%
+}
+.scroll {
+	width: fit-content;
+	overflow-y: auto;
+    margin-bottom: 20px;
+    scrollbar-width: none;
+	height: 50vh;
+	max-height: 50vh;
+    
+}
+/* Oculta los scrollbars en Webkit (Chrome, Safari, etc.) */
+.scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.formulario {
+	background-color: yellow;
+    display: flex;
+    align-items: center;
+    margin: 0.3rem;	
+	position: fixed; 
+	bottom: 10;
+
+}
+.inputText {    
+	margin: 0.3rem;	
+    width: 35rem;
+    padding: 0.5rem 0.5rem; 
+    flex: 1;    
+}
+.submitButton {
+    cursor: pointer;
+    border: none;  
+    background-color: white; 
+}
+input:focus {
+	outline: none;
+}
+
+@keyframes blink {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+.inputText.typing {
+	animation: blink 1s infinite;
+	color: rgb(5, 5, 66);
+	font-weight: bolder;
+}

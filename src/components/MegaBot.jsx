@@ -1,23 +1,26 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
-import { ScrollShadow } from "@nextui-org/react";
+import { useState, useEffect } from "react";
 import { Content } from "./Content";
-import DataForm from "./DataForm";
 import { Modal1 } from "./Modal1";
-//import send from "../assets/square3d-from-center.svg"
-//import send from "../assets/xmark-square-solid.svg"
 import send from "../assets/xmark-circle-solid.svg"
+import "./MegaBot.css"
 
 const baseURL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_LOCAL;
-//const baseURL = "https://api-landingpage.onrender.com"
 console.log("Apuntando a:", baseURL)
 
 const MegaBot = () => {
+  const greeting = "Soy un ChatBot de Inteligencia Artificial. Te invito a conversar haciendome las preguntas que creas necesarias para entender como los Chatbots de IA te pueden ayudar en tu negocio!Soy un ChatBot de Inteligencia Artificial. Te invito a conversar haciendome las preguntas que creas necesarias para entender como los Chatbots de IA te pueden ayudar en tu negocio!Soy un ChatBot de Inteligencia Artificial. Te invito a conversar haciendome las preguntas que creas necesarias para entender como los Chatbots de IA te pueden ayudar en tu negocio!"
+  
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState([{role: "assistant", content: greeting}])
   const [isTyping, setIsTyping] = useState(false);
   const [numberOfMessages, setNumberOfMessages] = useState(0)
-  const scrollRef = useRef(null);
+
+  // For automatic scroll in the UI
+  /* const messagesEndRef = React.useRef(null);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }; */
 
   const getMessages = async (event) => {
 
@@ -56,6 +59,7 @@ const MegaBot = () => {
         `${baseURL}/chatGpt/askMyChatGpt`,
         options
       );
+
       const data = await response.json();
       setMessages((prevMessages) => [...prevMessages, data]);
       // --- If I want to persist the State in the browser ---//
@@ -72,30 +76,30 @@ const MegaBot = () => {
   };
 
   useEffect(() => {
-    const scrollElement = scrollRef.current;
-    scrollElement.scrollTop = scrollElement.scrollHeight;
-        
+    //scrollToBottom()
   }, [messages]);
 
   return (
-    <div className="">
-      <ScrollShadow hideScrollBar size={25} className="scroll" ref={scrollRef}>
-        <Content messages={messages} />
-        <br />
-        {numberOfMessages === 2 ? <DataForm /> : ""}
-        {numberOfMessages === 1 ? <Modal1 /> : ""}
-      </ScrollShadow>
-      <form className="flex items-center input-container" onSubmit={getMessages}>
+    <div className="chat-container">
+
+      <div className="scroll" /* ref={messagesEndRef} */ >
+        <Content messages={messages} /* ref={messagesEndRef} */ />
+        {/* {numberOfMessages === 1 ? <Modal1 /> : ""} */}
+        <br />        
+      </div>
+
+      <form className="formulario" onSubmit={getMessages}>
         <input
-          className={`inputText border-2 rounded p-2 ${isTyping ? 'typing' : ''}`}
+          className={`${isTyping ? 'typing inputText' : 'inputText'}`}
           value={isTyping ? "Buscando información en mi base de conocimiento..." : input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Preguntame..."
         />
-        <button type="submit" className="submit z-10">
-          <img alt="send" src={send} />
+        <button type="submit" className="submitButton">
+          <img alt="send" src={send} className="img-button" />
         </button>
       </form>
+
     </div>
   );
 };

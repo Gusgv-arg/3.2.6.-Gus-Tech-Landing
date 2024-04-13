@@ -1,7 +1,6 @@
 import React from "react";
-import { Input, Button, Textarea } from "@nextui-org/react";
 
-
+// Component for sending contact form inside MegaBot interfase
 export default function DataForm() {
   const [mail, setMail] = React.useState("");
   const [name, setName] = React.useState("");
@@ -46,47 +45,32 @@ export default function DataForm() {
 
         <div className="">
           <form className="" onSubmit={submitHandler}>
-            <Input
-              isClearable
-              size="sm"
-              isRequired
+            <input
+              required
               value={name}
               type="string"
               label="Nombre"
-              variant="bordered"
-              color="default"
               onValueChange={setName}
-              className="max-w-xs inputForm"
+              className="inputForm"
             />
-            <Input
-              isClearable
-              size="sm"
-              isRequired
+            <input
+              required
               value={mail}
               type="email"
               label="Mail"
-              variant="bordered"
-              //color= "success"
-              isInvalid={isInvalid}
-              color={isInvalid ? "default" : "success"}
-              errorMessage={isInvalid && "Por favor ingrese un mail válido"}
               onValueChange={setMail}
-              className="max-w-xs inputForm"
+              className="inputForm"
             />
-            <Textarea
-              variant="bordered"
+            <textarea
               placeholder="Escribinos tu mensaje..."
-              color="default"
               value={message}
               onValueChange={setMessage}
-              className="max-w-xs inputForm "
+              className="inputForm "
             />
             <div>
-            <Button type="submit" className="inputFormButton" size="sm" color="default" variant="solid">Enviar</Button>
-            {apiResponse ? apiResponse : ""}
-            <br/>
-            
-            
+              <button type="submit" className="inputFormButton">Enviar</button>
+              {apiResponse ? apiResponse : ""}
+              <br />
             </div>
           </form>
         </div>

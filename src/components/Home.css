@@ -1,0 +1,9 @@
+.homeContainer {
+	width: fit-content; 
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    background-color: rgb(125, 95, 158);
+    margin: 0rem 6rem; 
+	height: 80vh 	
+}

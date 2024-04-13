@@ -1,0 +1,23 @@
+.chatbot-image {
+	margin-right: 0.2rem;
+	width: 1.5rem;
+	height: 1.5rem;
+}
+.assistant-role {
+	display: flex;
+	align-items: center;
+	background-color: black;
+	color: white;
+	padding: 5px;
+	width: fit-content;
+	margin: 0.3rem 0.3rem;
+	border-radius: 0.5rem;
+}
+.user-role {
+	padding: 5px;
+	background-color: rgb(237, 219, 219);
+	color: black;
+	width: fit-content;
+	margin: 0.3rem 0.3rem;
+	border-radius: 0.5rem;
+}

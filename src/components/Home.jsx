@@ -2,6 +2,7 @@ import React from 'react'
 import personaje from "../assets/Personaje.jpeg";
 import "animate.css"
 import MegaBot from './MegaBot';
+import "./Home.css"
 
 export const HomeScreen = () => {
 	return (
@@ -11,9 +12,8 @@ export const HomeScreen = () => {
 					src={personaje}
 					alt="personaje"
 					height="330"
-					viewBox="100 0 32 32"
 					width="330"
-					className="mx-20 animate__animated animate__bounce"
+					className="animate__animated animate__bounce"
 				/>
 			</div>
 			<div>
