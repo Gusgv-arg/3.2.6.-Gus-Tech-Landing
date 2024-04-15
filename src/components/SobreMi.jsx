@@ -1,7 +1,7 @@
 import React from 'react'
-import "./Nosotros.css"
+import "./SobreMi.css"
 
-const Nosotros = () => {
+const SobreMi = () => {
   const updatedMessages = JSON.parse(localStorage.getItem('messages'));
   
   if (updatedMessages) {
@@ -14,4 +14,4 @@ const Nosotros = () => {
   )
 }
 
-export default Nosotros
+export default SobreMi

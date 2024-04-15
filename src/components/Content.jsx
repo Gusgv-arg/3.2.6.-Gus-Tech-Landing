@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import "animate.css"
 import chatbot from "../assets/Chatbot con headphones fondo blanco.jpeg";
 import "./Content.css"
+import { question1, question2, question3 } from "../utils/Questions";
 
 export const Content = (props) => {
   const [printedContent, setPrintedContent] = useState([]);
+  const [showQuestion, setShowQuestion] = useState("hidden-question");
 
   // For automatic scroll in the UI
   const messagesEndRef = React.useRef(null);
@@ -38,8 +40,10 @@ export const Content = (props) => {
             });
             currentIndex++;
 
+            // At this point the message has been printed
             if (currentIndex === content.length) {
               clearInterval(intervalId);
+              setShowQuestion("visible-question")
             }
           }, 10);
         }
@@ -56,17 +60,29 @@ export const Content = (props) => {
   return (
     <>
       {props.messages?.map((chatMessage, index) => (
-        <div className={chatMessage.role === "user" ? "user-role" : "assistant-role"}
-          key={index}>
-          {chatMessage.role === "user" ? "" : <img
-            src={chatbot}
-            alt="chatbot"
-            className="chatbot-image"
-          />}
-          <span>{chatMessage.role === "assistant" && index === props.messages.length - 1 ? printedContent[index] : chatMessage.content}</span><br />
+        <div className="">
+          <div className={chatMessage.role === "user" ? "user-role" : "assistant-role"}
+            key={index}>
+            {chatMessage.role === "user" ? "" : <img
+              src={chatbot}
+              alt="chatbot"
+              className="chatbot-image"
+            />}
+            <span>{chatMessage.role === "assistant" && index === props.messages.length - 1 ? printedContent[index] : chatMessage.content}</span><br />
+          </div>
+
+          {index === 0 && (<>
+          <div className="questions-container">
+            <span className="questions"><button className={showQuestion}>{question1}</button></span>
+            <span className="questions"><button className={showQuestion}>{question2} </button></span>
+            <span className="questions"><button className={showQuestion}>{question3}</button></span>
+          </div>
+          </>
+          )}
           <div ref={messagesEndRef} />
         </div>
       ))}
     </>
   );
 };
+

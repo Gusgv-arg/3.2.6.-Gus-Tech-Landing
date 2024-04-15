@@ -10,15 +10,18 @@ const baseURL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_AP
 console.log("Apuntando a:", baseURL)
 
 const MegaBot = () => {
-  const greeting = "¡Hola! Soy MegaBot, Asistente virtual impulsado por Inteligencia Artificial. Te invito a conversar haciendome las preguntas que creas necesarias para entender como los Chatbots de IA te pueden ayudar en tu negocio."
+  const greeting = `¡Hola! Soy MegaBot, Asistente virtual impulsado por Inteligencia Artificial. Te invito a conversar y descubrir como los Chatbots de IA te pueden ayudar en tu negocio.!Empecemos!
+  `
 
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState(() => {
+  //Para que tome local storage: ACTIVAR DESPUES DE HABER DESARROLLADO
+  /* const [messages, setMessages] = useState(() => {
     const storedMessages = localStorage.getItem("messages");
     return storedMessages ? JSON.parse(storedMessages) : [{ role: "assistant", content: greeting, displayed: false }];
-  });
+  }); */
+  const [messages, setMessages] = useState([{ role: "assistant", content: greeting, isGreeting: true, displayed: false }]);
   const [isTyping, setIsTyping] = useState(false);
-  const [numberOfMessages, setNumberOfMessages] = useState(0)
+  const [numberOfMessages, setNumberOfMessages] = useState(1)
 
   // For automatic scroll in the UI
   const messagesEndRef = React.useRef(null);
@@ -64,6 +67,10 @@ const MegaBot = () => {
       );
 
       const data = await response.json();
+
+      // Add displayed propertie so Content renders it
+      data.displayed = false
+
       setMessages((prevMessages) => [...prevMessages, data]);
       setIsTyping(false);
       setNumberOfMessages(numberOfMessages + 1);
@@ -74,7 +81,7 @@ const MegaBot = () => {
       setMessages((prevMessages) => [...prevMessages, errorMessage]);
     }
   };
-  
+
   useEffect(() => {
     localStorage.setItem("messages", JSON.stringify(messages));
     scrollToBottom()
@@ -85,6 +92,7 @@ const MegaBot = () => {
     <div className="chat-container">
 
       <div className="scroll">
+
         {messages[messages.length - 1].displayed === true ? messages.map((chatMessage, index) => (
           <div className={chatMessage.role === "user" ? "user-role" : "assistant-role"}
             key={index}>
@@ -96,10 +104,12 @@ const MegaBot = () => {
             <span>{chatMessage.content}</span><br />
             <div ref={messagesEndRef} />
           </div>
-        )) : <Content messages={messages} />}
+        )) : (<>
+          <Content messages={messages} /> <br/><div ref={messagesEndRef} />
+        </>)}
 
-        {/* <Content messages={messages} /> */}
-        {/* {numberOfMessages === 1 ? <Modal1 /> : ""} */}
+        {/* {numberOfMessages === 1 && <button>pregunta</button>} 
+        {numberOfMessages === 1 && <button>pregunta2</button>}  */}
         <br />
       </div>
 

@@ -12,12 +12,40 @@
 	width: fit-content;
 	margin: 0.3rem 0.3rem;
 	border-radius: 0.5rem;
+	position: relative;
+	
 }
 .user-role {
+	display: flex;
 	padding: 5px;
 	background-color: rgb(221, 234, 221);
 	color: black;
 	width: fit-content;
 	margin: 0.3rem 0.3rem;
 	border-radius: 0.5rem;
+	word-break: break-word	
+}
+.hidden-question {
+	visibility: hidden;
+}
+.visible-question {
+	visibility: visible;
+	border-radius: 0.5rem;
+	padding: 0.5rem;
+	width: fit-content;
+	cursor: pointer;
+	border-width: 0.01rem;
+	box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgba(0,0,0,0.1); 
+}
+.visible-question:hover {
+	background-color: rgb(189, 185, 185);	 
+}
+.questions-container {
+	/* background-color: rgb(208, 204, 211); */
+	display: flex;
+	justify-content: space-between;
+}
+.questions {
+	margin: 1rem;
+	text-align: left;
 }
