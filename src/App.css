@@ -2,7 +2,7 @@
 	height: 100vh;
 	margin: 0;
 	padding: 0;
-	background-color: yellow; 
+	/* background-color: yellow;  */
     display: flex;
     flex-direction: column;
 }
@@ -11,15 +11,15 @@
     width: 100vw;
     top: 0;
     z-index: 1;
-    background-color: rgb(19, 18, 18);
+    /* background-color: rgb(19, 18, 18) */;
 }
 .content{
     flex: 1;
     height: 80vh;
-    background-color: rgb(209, 77, 77);
+    /* background-color: rgb(209, 77, 77); */
 }
 .footer {
-    background-color: rgb(107, 47, 47);
+    /* background-color: rgb(107, 47, 47); */
     height: 10vh;
 	position: fixed;
 	bottom: 0;	

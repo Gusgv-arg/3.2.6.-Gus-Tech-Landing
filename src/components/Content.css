@@ -6,8 +6,8 @@
 .assistant-role {
 	display: flex;
 	align-items: center;
-	background-color: black;
-	color: white;
+	background-color: white;
+	color: black;
 	padding: 5px;
 	width: fit-content;
 	margin: 0.3rem 0.3rem;
@@ -15,7 +15,7 @@
 }
 .user-role {
 	padding: 5px;
-	background-color: rgb(237, 219, 219);
+	background-color: rgb(221, 234, 221);
 	color: black;
 	width: fit-content;
 	margin: 0.3rem 0.3rem;

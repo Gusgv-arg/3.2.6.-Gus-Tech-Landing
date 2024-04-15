@@ -19,8 +19,8 @@ export default function App() {
 				<main className="content" >
 					<Routes >
 						<Route exact path="/" element={<HomeScreen />} />
-						<Route path="/contacto" element={<ContactForm />} />
-						<Route path="/nosotros" element={<Nosotros />} />
+						<Route path="/agendar reunión" element={<ContactForm />} />
+						<Route path="/sobre mi" element={<Nosotros />} />
 						<Route path="*" element={<Error404 />} />
 					</Routes>
 				</main>

@@ -20,26 +20,52 @@
 }
 
 .formulario {
-	background-color: yellow;
+	/* background-color: yellow; */
     display: flex;
     align-items: center;
     margin: 0.3rem;	
 	position: fixed; 
 	bottom: 10;
-
+}
+.inputContainer {
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 .inputText {    
 	margin: 0.3rem;	
-    width: 35rem;
-    padding: 0.5rem 0.5rem; 
-    flex: 1;    
+    width: 46rem;
+	height: 1.5rem;
+    max-width: 45rem;
+	padding: 0.5rem 0.5rem; 
+    flex: 1;  
+	border-radius: 10px;
+	border-width: 0.5px;
 }
 .submitButton {
-    cursor: pointer;
-    border: none;  
-    background-color: white; 
+	position: absolute;
+    top: 55%;
+    transform: translateY(-55%);
+    right: 0.5rem;
+    cursor: pointer; 
+	border: none;
+	background-color: white;	
 }
-input:focus {
+.submitButtonWithNoInput {
+	position: absolute;
+    top: 55%;
+    transform: translateY(-55%);
+    right: 0.5rem;
+    cursor: pointer; 
+	border: none;
+	background-color: white;
+	opacity: 30%;	
+}
+
+.img-button {
+    width: 100%;    
+}
+inputText:focus {
 	outline: none;
 }
 
@@ -54,9 +80,8 @@ input:focus {
 		opacity: 0;
 	}
 }
-
 .inputText.typing {
 	animation: blink 1s infinite;
-	color: rgb(5, 5, 66);
+	color: black;
 	font-weight: bolder;
 }

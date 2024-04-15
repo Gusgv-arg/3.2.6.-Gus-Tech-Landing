@@ -4,9 +4,8 @@
     align-items: center;
     padding: 0 20px; 
     box-shadow: 0 0.1rem 0 0 rgba(0,0,0,0.1); 
-    
     margin: 0 6rem;
-    background-color: beige;
+    /* background-color: beige; */
 }
 .nav-container > div:first-child a {
     display: flex;
@@ -22,9 +21,10 @@
 .menu-items a {
     text-decoration: none;
     color: black;
-    display: flex;
+    display:inline-flexbox;
     justify-content: flex-end; 
-    gap: 10rem;
+    margin: 0 5rem
+    
 }
 .active-link {
 	text-decoration: none;

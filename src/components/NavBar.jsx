@@ -6,7 +6,7 @@ import "./NavBar.css"
 export const NavBar = (props) => {
     const [activeLink, setActiveLink] = useState("");
 
-    const menuItems = ["Nosotros"];
+    const menuItems = ["Agendar Reunión","Sobre Mi"];
 
     return (
         <>

@@ -2,10 +2,13 @@
 	display: flex;
 	justify-content: left;
 	margin: 0 6rem 0 ;
-    background-color: cadetblue;
+	font-size: 0.7rem;
+    /* background-color: cadetblue; */
 }
-.contactos p {
+.contactos a {
 	padding: 10px;
+	font-size: 0.7rem;
+	text-decoration: none;
 }
 .whatsapp {
 	color: green;
