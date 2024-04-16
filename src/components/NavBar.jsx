@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import chatbot from "../assets/Chatbot con headphones fondo blanco.jpeg";
 import { useState } from "react";
 import "./NavBar.css"
@@ -26,14 +26,15 @@ export const NavBar = (props) => {
                 <div className="menu-items">
                     {
                         menuItems.map((item, index) => (
+                            
                             <span key={`${item}-${index}`}>
-                                <Link
+                                <NavLink
                                     className={activeLink === item ? "active-link" : ""}
                                     onClick={() => setActiveLink(item)}
-                                    to={`/${menuItems[index]}`}
+                                    to={`/${menuItems[index]}`}                                    
                                 >
                                     {item}
-                                </Link>
+                                </NavLink>
                             </span>
                         ))
                     }

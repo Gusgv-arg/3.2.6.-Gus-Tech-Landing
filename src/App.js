@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { HomeScreen } from "./components/Home";
-import ContactForm from "./components/ContactForm";
 import { Error404 } from "./components/Error404-NotFound";
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import "./App.css"
 import SobreMi from "./components/SobreMi";
+import { AgendarReunion } from "./components/AgendarReunion";
 
 export default function App() {
 	return (
@@ -19,7 +19,7 @@ export default function App() {
 				<main className="content" >
 					<Routes >
 						<Route exact path="/" element={<HomeScreen />} />
-						<Route path="/agendar reunión" element={<ContactForm />} />
+						<Route path="/agendar reunión" element={<AgendarReunion />} />
 						<Route path="/sobre mi" element={<SobreMi />} />
 						<Route path="*" element={<Error404 />} />
 					</Routes>

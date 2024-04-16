@@ -1,0 +1,8 @@
+
+.reunion {
+    /* background-color: green; */
+    height: 75vh;
+    margin: auto;
+    width: fit-content;
+    display: flex
+}

@@ -2,16 +2,34 @@ import React, { useState, useEffect } from "react";
 import "animate.css"
 import chatbot from "../assets/Chatbot con headphones fondo blanco.jpeg";
 import "./Content.css"
-import { question1, question2, question3 } from "../utils/Questions";
+import { question1, answerQuestion1, question2, answerQuestion2, question3, answerQuestion3 } from "../utils/Questions";
+import { useGlobalState } from "../utils/GlobalStateContext";
+
 
 export const Content = (props) => {
   const [printedContent, setPrintedContent] = useState([]);
   const [showQuestion, setShowQuestion] = useState("hidden-question");
 
+  // Access Global State
+  const { messages, setMessages } = useGlobalState();  
+
   // For automatic scroll in the UI
   const messagesEndRef = React.useRef(null);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleQuestion1 = () => {
+    const newMessage = { role: "assistant", content: answerQuestion1, displayed: false };
+    setMessages([...messages, newMessage]);
+  };
+  const handleQuestion2 = () => {
+    const newMessage = { role: "assistant", content: answerQuestion2, displayed: false };
+    setMessages([...messages, newMessage]);
+  };
+  const handleQuestion3 = () => {
+    const newMessage = { role: "assistant", content: answerQuestion3, displayed: false };
+    setMessages([...messages, newMessage]);
   };
 
   useEffect(() => {
@@ -40,7 +58,7 @@ export const Content = (props) => {
             });
             currentIndex++;
 
-            // At this point the message has been printed
+            // Printed words -> change questions to visible
             if (currentIndex === content.length) {
               clearInterval(intervalId);
               setShowQuestion("visible-question")
@@ -56,7 +74,7 @@ export const Content = (props) => {
       return
     }
   }, [props.messages]);
-
+  
   return (
     <>
       {props.messages?.map((chatMessage, index) => (
@@ -73,9 +91,9 @@ export const Content = (props) => {
 
           {index === 0 && (<>
           <div className="questions-container">
-            <span className="questions"><button className={showQuestion}>{question1}</button></span>
-            <span className="questions"><button className={showQuestion}>{question2} </button></span>
-            <span className="questions"><button className={showQuestion}>{question3}</button></span>
+            <span className="questions"><button onClick={handleQuestion1} className={showQuestion}>{question1}</button></span>
+            <span className="questions"><button onClick={handleQuestion2} className={showQuestion}>{question2} </button></span>
+            <span className="questions"><button onClick={handleQuestion3} className={showQuestion}>{question3}</button></span>
           </div>
           </>
           )}

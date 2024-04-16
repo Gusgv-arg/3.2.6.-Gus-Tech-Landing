@@ -1,25 +1,27 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Content } from "./Content";
-import { Modal1 } from "./Modal1";
 import send from "../assets/xmark-circle-solid.svg"
 import "./MegaBot.css"
 import chatbot from "../assets/Chatbot con headphones fondo blanco.jpeg";
+import { useGlobalState } from "../utils/GlobalStateContext";
 
 const baseURL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_LOCAL;
 console.log("Apuntando a:", baseURL)
 
 const MegaBot = () => {
-  const greeting = `¡Hola! Soy MegaBot, Asistente virtual impulsado por Inteligencia Artificial. Te invito a conversar y descubrir como los Chatbots de IA te pueden ayudar en tu negocio.!Empecemos!
-  `
 
-  const [input, setInput] = useState("");
   //Para que tome local storage: ACTIVAR DESPUES DE HABER DESARROLLADO
   /* const [messages, setMessages] = useState(() => {
     const storedMessages = localStorage.getItem("messages");
     return storedMessages ? JSON.parse(storedMessages) : [{ role: "assistant", content: greeting, displayed: false }];
   }); */
-  const [messages, setMessages] = useState([{ role: "assistant", content: greeting, isGreeting: true, displayed: false }]);
+
+  // Access Global State
+  const { messages, setMessages } = useGlobalState();
+
+  // Local States
+  const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [numberOfMessages, setNumberOfMessages] = useState(1)
 
@@ -102,20 +104,17 @@ const MegaBot = () => {
               className="chatbot-image"
             />}
             <span>{chatMessage.content}</span><br />
+           
             <div ref={messagesEndRef} />
           </div>
         )) : (<>
-          <Content messages={messages} /> <br/><div ref={messagesEndRef} />
-        </>)}
-
-        {/* {numberOfMessages === 1 && <button>pregunta</button>} 
-        {numberOfMessages === 1 && <button>pregunta2</button>}  */}
+          <Content messages={messages} /> <br /><div ref={messagesEndRef} />
+        </>)}        
         <br />
       </div>
 
       <form className="formulario" onSubmit={getMessages}>
         <div className="inputContainer">
-
           <input
             className={`${isTyping ? 'typing inputText' : 'inputText'}`}
             value={isTyping ? "Buscando en mi base de conocimiento..." : input}
