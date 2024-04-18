@@ -10,6 +10,9 @@
 	font-size: 0.7rem;
 	text-decoration: none;
 }
+.contactos a:hover {	
+	font-weight: bold;
+}
 .whatsapp {
 	color: green;
 	font-weight: bold;

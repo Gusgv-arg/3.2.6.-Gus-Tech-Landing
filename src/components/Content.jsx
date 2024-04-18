@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "animate.css"
 import chatbot from "../assets/Chatbot con headphones fondo blanco.jpeg";
-import "./Content.css"
+
 import { question1, answerQuestion1, question2, answerQuestion2, question3, answerQuestion3 } from "../utils/Questions";
 import { useGlobalState } from "../utils/GlobalStateContext";
 
 
 export const Content = (props) => {
   const [printedContent, setPrintedContent] = useState([]);
-  const [showQuestion, setShowQuestion] = useState("hidden-question");
-
+  
   // Access Global State
-  const { messages, setMessages } = useGlobalState();  
+  const { messages, setMessages, showQuestion, setShowQuestion } = useGlobalState();
 
   // For automatic scroll in the UI
   const messagesEndRef = React.useRef(null);
@@ -58,10 +57,11 @@ export const Content = (props) => {
             });
             currentIndex++;
 
-            // Printed words -> change questions to visible
+            // Printed words -> change questions to visible & save in local storage
             if (currentIndex === content.length) {
-              clearInterval(intervalId);
+              clearInterval(intervalId);         
               setShowQuestion("visible-question")
+              localStorage.setItem("showQuestion", JSON.stringify(showQuestion));
             }
           }, 10);
         }
@@ -74,12 +74,12 @@ export const Content = (props) => {
       return
     }
   }, [props.messages]);
-  
+
   return (
     <>
       {props.messages?.map((chatMessage, index) => (
         <div className="">
-          <div className={chatMessage.role === "user" ? "user-role" : "assistant-role"}
+          <div className={chatMessage.role === "assistant" ? "assistant-role" : "user-role"}
             key={index}>
             {chatMessage.role === "user" ? "" : <img
               src={chatbot}
@@ -90,11 +90,11 @@ export const Content = (props) => {
           </div>
 
           {index === 0 && (<>
-          <div className="questions-container">
-            <span className="questions"><button onClick={handleQuestion1} className={showQuestion}>{question1}</button></span>
-            <span className="questions"><button onClick={handleQuestion2} className={showQuestion}>{question2} </button></span>
-            <span className="questions"><button onClick={handleQuestion3} className={showQuestion}>{question3}</button></span>
-          </div>
+            <div className="questions-container">
+              <span className="questions"><button onClick={handleQuestion1} className={showQuestion}>{question1}</button></span>
+              <span className="questions"><button onClick={handleQuestion2} className={showQuestion}>{question2} </button></span>
+              <span className="questions"><button onClick={handleQuestion3} className={showQuestion}>{question3}</button></span>
+            </div>
           </>
           )}
           <div ref={messagesEndRef} />

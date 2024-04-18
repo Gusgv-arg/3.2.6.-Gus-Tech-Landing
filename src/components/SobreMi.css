@@ -1,5 +1,18 @@
 .nosotros {
 	margin: 0rem 6rem;
 	height: 80vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
     /* background-color: blueviolet; */
+}
+.contenido {	
+	background-color: rgb(92, 90, 87);
+	color: white;
+	height: 70vh;
+	max-height:fit-content;
+	width: 70vw;
+	padding: 0.6rem 1.75rem;
+	padding-bottom: 1rem;
+	
 }

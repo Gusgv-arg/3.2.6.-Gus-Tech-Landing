@@ -18,6 +18,15 @@ export const Footer = () => {
                         +54911 61405589
                     </a>
                 </p>
+                <p>
+                    {/* Tidy Cal no ofrece en la version gratis el link de Google meet */}
+                    {/* <a href="https://tidycal.com/gusgvillafane" target="_blank" rel="noreferrer">
+                        Agendar Reunión
+                    </a> */}
+                    <a href="https://calendly.com/gusgvillafane/inteligencia-artificial" target="_blank" rel="noreferrer">
+                        Agendar Reunión
+                    </a>
+                </p>
             </div>
         </>
     )

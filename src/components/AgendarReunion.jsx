@@ -1,10 +1,9 @@
 import React from 'react'
 import "./AgendarReunion.css"
 import Calendly from './Calendly';
-
+import TidyCal from './TidyCal';
 
 export const AgendarReunion = () => {
-
 
 	return (
 		<div className="reunion">
@@ -14,7 +13,7 @@ export const AgendarReunion = () => {
 			<div>
 				<Calendly url="https://calendly.com/gusgvillafane/30min" />
 				{/* <Calendly url="https://calendly.com/gusgvillafane" /> */}
-
+				
 			</div>
 		</div>
 	);

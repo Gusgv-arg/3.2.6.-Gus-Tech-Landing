@@ -6,17 +6,18 @@ import "./NavBar.css"
 export const NavBar = (props) => {
     const [activeLink, setActiveLink] = useState("");
 
-    const menuItems = ["Agendar Reunión","Sobre Mi"];
+    const menuItems = ["Sobre Mi"];
 
     return (
         <>
             <div className="nav-container">
                 <div>
                     <Link to="/" >
-                        <div className="">
+                        <div>
                             <img
                                 src={chatbot}
-                                alt="chatbot"           
+                                alt="chatbot" 
+                                className="image"        
                             />
                             <span>MegaBot</span>
                         </div>
