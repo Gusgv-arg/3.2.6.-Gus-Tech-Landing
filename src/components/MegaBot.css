@@ -87,26 +87,27 @@
 	margin: 0.3rem;
 	width: 46rem;
 	height: 1.5rem;
-	max-width: 45rem;
-	padding: 0.5rem 0.5rem;
+	max-width: 35rem;
+	padding: 1.1rem 0.5rem;
 	flex: 1;
 	border-radius: 10px;
 	border-width: 0.5px;
 }
 .submitButton {
 	position: absolute;
-	top: 55%;
+	top: 57%;
 	transform: translateY(-55%);
-	right: 0.5rem;
+	right: 0.7rem;
 	cursor: pointer;
 	border: none;
 	background-color: white;
+
 }
 .submitButtonWithNoInput {
 	position: absolute;
-	top: 55%;
+	top: 57%;
 	transform: translateY(-55%);
-	right: 0.5rem;
+	right: 0.7rem;
 	cursor: pointer;
 	border: none;
 	background-color: white;

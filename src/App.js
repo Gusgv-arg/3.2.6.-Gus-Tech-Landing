@@ -11,7 +11,8 @@ import { AgendarReunion } from "./components/AgendarReunion";
 export default function App() {
 	return (
 		<>
-			<div className="screen">
+			<div className="grid">
+				
 				<header className="navbar">
 					<NavBar />
 				</header>

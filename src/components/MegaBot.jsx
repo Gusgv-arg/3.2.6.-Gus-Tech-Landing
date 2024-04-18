@@ -11,13 +11,7 @@ const baseURL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_AP
 console.log("Apuntando a:", baseURL)
 
 const MegaBot = () => {
-
-  //Para que tome local storage: ACTIVAR DESPUES DE HABER DESARROLLADO
-  /* const [messages, setMessages] = useState(() => {
-    const storedMessages = localStorage.getItem("messages");
-    return storedMessages ? JSON.parse(storedMessages) : [{ role: "assistant", content: greeting, displayed: false }];
-  }); */
-
+  
   // Access Global State
   const { messages, setMessages, showQuestion } = useGlobalState();
 
@@ -38,6 +32,7 @@ const MegaBot = () => {
     const newMessage = { role: "assistant", content: answerQuestion3, displayed: false };
     setMessages([...messages, newMessage]);
   };
+
   // For automatic scroll in the UI
   const messagesEndRef = React.useRef(null);
   const scrollToBottom = () => {
@@ -108,7 +103,6 @@ const MegaBot = () => {
     <div className="chat-container">
 
       <div className="scroll">
-
         {messages[messages.length - 1].displayed === true ? messages.map((chatMessage, index) => (
           <div>
             <div className={chatMessage.role === "assistant" ? "assistant-role" : "user-role"}
