@@ -13,7 +13,7 @@ export const HomeScreen = () => {
 					alt="personaje"
 					height="330"
 					width="330"
-					className="animate__animated animate__bounce"
+					className="animate__animated animate__bounce animate__delay-4s"					
 				/>
 			</div>
 			<div>

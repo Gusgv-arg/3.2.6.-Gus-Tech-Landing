@@ -1,18 +1,18 @@
 .chat-container {
 	width: fit-content;
-	/* background-color: rgb(193, 154, 97);  */
+	/* background-color: rgb(193, 154, 97); */
 	overflow: hidden;
-	height: 100%;
-	position: relative;
-	bottom: 2rem	
+	height: 25rem;
+	display: flex;
+	flex-direction: column;
 }
 .scroll {
+	/* border: solid; */
 	width: fit-content;
 	overflow-y: auto;
 	margin-bottom: 20px;
-	scrollbar-width: none;
-	height: 50vh;
-	max-height: 50vh;
+	scrollbar-width: none;	
+	max-height: 80%;
 }
 /* Oculta los scrollbars en Webkit (Chrome, Safari, etc.) */
 .scroll::-webkit-scrollbar {
@@ -31,13 +31,27 @@
 	padding: 5px;
 	width: fit-content;
 	margin: 0.3rem 0.3rem;
-	border-radius: 0.5rem;	
+	border-radius: 0.5rem;
+}
+.user-role {
+	display: flex;
+	padding: 5px;
+	background-color: rgb(221, 234, 221);
+	color: black;
+	width: fit-content;
+	margin-right: 4rem;
+	margin-left: auto;
+	border-radius: 0.5rem;
+	word-break: break-word;
 }
 .questions-container {
 	/* background-color: rgb(208, 204, 211); */
 	display: flex;
-	justify-content: space-between;
-	top:5rem
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+	gap: 1rem;
+	top: 5rem;
 }
 .hidden-question {
 	visibility: hidden;
@@ -46,73 +60,59 @@
 	visibility: visible;
 	border-radius: 0.5rem;
 	padding: 0.5rem;
-	width: fit-content;
+	width: 10rem;
 	cursor: pointer;
 	border-width: 0.01rem;
-	box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgba(0,0,0,0.1); 
-	margin: 1rem;	
+	box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
+	margin: 0.5rem auto;
 }
 .visible-question:hover {
-	background-color: rgb(16, 15, 15);	
-	color: white 
-}
-.user-role {
-	display: flex;
-	padding: 5px;
-	background-color: rgb(221, 234, 221);
-	color: black;
-	width: fit-content;
-	margin: 0.3rem 0.3rem;
-	border-radius: 0.5rem;
-	word-break: break-word;
-}
-.user-role-second {
-	background-color: aqua;
-	margin-top: 5rem
-}
-.formulario {
-	/* background-color: yellow; */
-	display: flex;
-	align-items: center;
-	margin: 0.3rem;
-	position: fixed;
-	bottom: 10;
+	background-color: rgb(16, 15, 15);
+	color: white;
 }
 .inputContainer {
 	display: flex;
-	align-items: center;
-	position: relative;
+	justify-content: center;
+}
+.formulario {
+	margin: 0.3rem;
+	position: fixed;
+	bottom:8rem;
+	display: flex;
+	align-content: center;
 }
 .inputText {
 	margin: 0.3rem;
-	width: 46rem;
 	height: 1.5rem;
-	max-width: 35rem;
+	min-width: 30rem;
 	padding: 1.1rem 0.5rem;
-	flex: 1;
 	border-radius: 10px;
-	border-width: 0.5px;
+	border-width: 0.5px;	
 }
 .submitButton {
-	position: absolute;
-	top: 57%;
-	transform: translateY(-55%);
-	right: 0.7rem;
 	cursor: pointer;
 	border: none;
-	background-color: white;
-
+	background-color:transparent;
+	position: relative;
+	right: 2.5rem;	
 }
 .submitButtonWithNoInput {
-	position: absolute;
-	top: 57%;
-	transform: translateY(-55%);
-	right: 0.7rem;
-	cursor: pointer;
 	border: none;
-	background-color: white;
+	background-color: transparent;
 	opacity: 30%;
+	position: relative;
+	right: 2.5rem;	
 }
+.submitButtonWithNoInput[disabled]:hover::before {
+	content: "Enviar Mensaje";
+	position: absolute;
+	bottom: 3rem;
+	right: 0rem;
+	background-color: black;
+	color: white;
+	padding: 5px;
+	border-radius: 5px;	
+  }
 
 .img-button {
 	width: 100%;
@@ -137,4 +137,3 @@ inputText:focus {
 	color: black;
 	font-weight: bolder;
 }
-

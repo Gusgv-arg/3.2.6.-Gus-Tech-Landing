@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom"
-import chatbot from "../assets/Chatbot con headphones fondo blanco.jpeg";
+import chatbot from "../assets/Personaje.jpeg";
 import { useState } from "react";
 import "./NavBar.css"
 
@@ -14,11 +14,11 @@ export const NavBar = (props) => {
                 <div>
                     <Link to="/" >
                         <div>
-                            <img
+                           {/*  <img
                                 src={chatbot}
                                 alt="chatbot" 
                                 className="image"        
-                            />
+                            /> */}
                             <span>MegaBot</span>
                         </div>
                     </Link >

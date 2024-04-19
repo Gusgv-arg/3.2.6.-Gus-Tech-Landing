@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Content } from "./Content";
-import send from "../assets/xmark-circle-solid.svg"
+import send from "../assets/arrow-up-circle-solid.svg"
 import "./MegaBot.css"
 import chatbot from "../assets/Chatbot con headphones fondo blanco.jpeg";
 import { useGlobalState } from "../utils/GlobalStateContext";
@@ -11,7 +11,7 @@ const baseURL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_AP
 console.log("Apuntando a:", baseURL)
 
 const MegaBot = () => {
-  
+
   // Access Global State
   const { messages, setMessages, showQuestion } = useGlobalState();
 
@@ -123,27 +123,29 @@ const MegaBot = () => {
               </div>
             </>
             )}
+            <br></br>
             <div ref={messagesEndRef} />
           </div>
         )) : (<>
           <Content messages={messages} /> <br /><div ref={messagesEndRef} />
-        </>)}        
+        </>)}
         <br />
       </div>
 
-      <form className="formulario" onSubmit={getMessages}>
-        <div className="inputContainer">
+      <div className="inputContainer">
+        <form className="formulario" onSubmit={getMessages}>
           <input
             className={`${isTyping ? 'typing inputText' : 'inputText'}`}
             value={isTyping ? "Buscando en mi base de conocimiento..." : input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Preguntale a MegaBot..."
           />
-          <button type="submit" className={input ? "submitButton" : "submitButtonWithNoInput"}>
+          <button type="submit" className={input ? "submitButton" : "submitButtonWithNoInput"} disabled={!input}>
             <img alt="send" src={send} className="img-button" />
           </button>
-        </div>
-      </form>
+        </form>
+      </div>
+
     </div>
   );
 };

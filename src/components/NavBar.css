@@ -5,7 +5,7 @@
     align-items: center;
     padding: 0 20px; 
     box-shadow: 0 0.1rem 0 0 rgba(0,0,0,0.1); 
-    margin: 0 6rem;
+    margin: 1rem 6rem;
 }
 .nav-container > div:first-child a {
     display: flex;
@@ -21,7 +21,9 @@
 }
 .image {
     position: relative;
-    bottom: 0.2rem
+    bottom: 0.2rem;
+    background-color: transparent;
+    max-height: 50%
 }
 .menu-items a {
     text-decoration: none;
@@ -30,6 +32,9 @@
     justify-content: flex-end; 
     margin: 0 5rem
     
+}
+.menu-items a:hover {
+    font-weight: bold;
 }
 .active-link {
 	text-decoration: none;
