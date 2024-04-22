@@ -1,9 +1,10 @@
 .contactos {
 	display: flex;
 	justify-content: left;
-	margin: 0 6rem 0 ;
+	margin: 2rem 6rem 0 ;
 	font-size: 0.7rem;
     /* background-color: cadetblue; */
+	
 }
 .contactos a {
 	padding: 10px;
@@ -16,4 +17,19 @@
 .whatsapp {
 	color: green;
 	font-weight: bold;
+}
+@media (width<700px){
+	.contactos {
+		display: flex;
+		justify-content: left;
+		margin: 2rem 6rem 0 ;
+		font-size: 0.7rem;
+		/* background-color: cadetblue; */
+		margin: 2rem 1rem 1.5rem 1rem;
+	}	
+	.contactos a {
+		padding: 2px;
+		font-size: 0.5rem;
+		text-decoration: none;
+	}
 }

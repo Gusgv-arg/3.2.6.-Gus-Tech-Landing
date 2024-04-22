@@ -14,9 +14,10 @@ const SobreMi = () => {
       setMessages(updatedMessages);
     }
   }, []);
-  
+
   return (
-    <div className='nosotros'>
+    <div className="sobremi">
+
       <div className='contenido'>
         <p>
           Hola, mi nombre es Gustavo Gómez Villafañe de Argentina. Soy Licenciado en Administración de Empresas con un MBA y Desarrollador especializado en Inteligencia Artificial.
@@ -28,15 +29,15 @@ const SobreMi = () => {
           En los comienzos de mi carrera profesional, con 22 años y trabajando en el área de Costos y Precios de Repuestos, comencé a estudiar programación y comprobar los beneficios de la tecnología aplicada a los procesos. De estar en un puesto de mucho trabajo manual, logré automatizarlo y transformarlo a un puesto de análisis de la información facilitando la toma de decisiones.
         </p>
         <p>
-          Mi carrera siguió, y ahora como emprendedor independiente, hace 2 años retomé mi pasión por la Programación teniendo que actualizarme en las nuevas tecnologías. 
+          Mi carrera siguió, y ahora como emprendedor independiente, hace 2 años retomé mi pasión por la Programación teniendo que actualizarme en las nuevas tecnologías.
         </p>
         <p>
-          Durante los años 2000 Internet provocó una revolución y cambió todo para siempre. Hoy, y más allá de las opiniones o gustos, el mundo va hacia el uso masivo de la Inteligencia Artificial y ya está provocando una nueva revolución en las industrias.  
+          Durante los años 2000 Internet provocó una revolución y cambió todo para siempre. Hoy, y más allá de las opiniones o gustos, el mundo va hacia el uso masivo de la Inteligencia Artificial y ya está provocando una nueva revolución en las industrias.
         </p>
         <p>
-          Creo que es momento de actuar rápido ante este nuevo escenario; y para esto estoy preparado para ayudar a las empresas en ese proceso de cambio aportando mi formación y experiencia.   
+          Creo que es momento de actuar rápido ante este nuevo escenario; y para esto estoy preparado para ayudar a las empresas en ese proceso de cambio aportando mi formación y experiencia.
         </p>
-        <br/>
+        <br />
       </div>
     </div>
   )

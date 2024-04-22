@@ -78,7 +78,7 @@ export const Content = (props) => {
   return (
     <>
       {props.messages?.map((chatMessage, index) => (
-        <div className="">
+        <div>
           <div className={chatMessage.role === "assistant" ? "assistant-role" : "user-role"}
             key={index}>
             {chatMessage.role === "user" ? "" : <img
@@ -86,7 +86,7 @@ export const Content = (props) => {
               alt="chatbot"
               className="chatbot-image"
             />}
-            <span>{chatMessage.role === "assistant" && index === props.messages.length - 1 ? printedContent[index] : chatMessage.content}</span><br />
+            <span>{chatMessage.role === "assistant" && index === props.messages.length - 1 ? printedContent[index] : chatMessage.content}</span>
           </div>
 
           {index === 0 && (<>

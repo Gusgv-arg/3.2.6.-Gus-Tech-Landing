@@ -7,16 +7,15 @@ import "./Home.css"
 export const HomeScreen = () => {
 	return (
 		<div className="homeContainer">
-			<div >
+			<div className='personaje'>
 				<img
 					src={personaje}
-					alt="personaje"
-					height="330"
-					width="330"
-					className="animate__animated animate__bounce animate__delay-4s"					
+					alt="personaje"					
+					className="animate__animated animate__bounce animate__delay-4s image"	
+									
 				/>
 			</div>
-			<div>
+			<div className='megabot'>
 				<MegaBot />
 			</div>
 		</div>

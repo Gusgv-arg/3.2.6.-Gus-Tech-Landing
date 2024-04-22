@@ -1,5 +1,4 @@
 import { Link, NavLink } from "react-router-dom"
-import chatbot from "../assets/Personaje.jpeg";
 import { useState } from "react";
 import "./NavBar.css"
 
@@ -14,12 +13,7 @@ export const NavBar = (props) => {
                 <div>
                     <Link to="/" >
                         <div>
-                           {/*  <img
-                                src={chatbot}
-                                alt="chatbot" 
-                                className="image"        
-                            /> */}
-                            <span>MegaBot</span>
+                           <span>MegaBot</span>
                         </div>
                     </Link >
                 </div>
@@ -27,12 +21,12 @@ export const NavBar = (props) => {
                 <div className="menu-items">
                     {
                         menuItems.map((item, index) => (
-                            
+
                             <span key={`${item}-${index}`}>
                                 <NavLink
                                     className={activeLink === item ? "active-link" : ""}
                                     onClick={() => setActiveLink(item)}
-                                    to={`/${menuItems[index]}`}                                    
+                                    to={`/${menuItems[index]}`}
                                 >
                                     {item}
                                 </NavLink>

@@ -1,5 +1,6 @@
+/* FLEX */
 .homeContainer {
-    /* background-color: rgb(125, 95, 158); */
+    /* background-color: rgb(125, 95, 158); */ 
 	width: fit-content; 
 	display: flex;
 	justify-content: center;
@@ -7,3 +8,47 @@
     margin: 0rem 6rem; 
 	height: 80vh 	
 }
+.image{	
+	aspect-ratio: 1/1;
+	width: 30vw;
+	margin: auto;	
+}
+@media (max-width: 699px) {
+    .image {
+        display: none;
+    }
+}
+/* GRID */
+/* .homeContainer {
+    background-color: rgb(125, 95, 158); 
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-template-areas:
+	"personaje megabot";
+	width: fit-content; 
+	justify-content: center;
+	align-items: center;
+    margin: 0rem 6rem; 
+	height: 80vh 	
+}
+.personaje{
+	grid-area: personaje;
+}
+.megabot{
+	grid-area: megabot;
+}
+
+@media (width <500px){
+	.homeContainer {
+		background-color: rgb(125, 95, 158); 
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-areas:
+		"megabot";
+		width: fit-content; 
+		justify-content: center;
+		align-items: center;
+		margin: 0rem 6rem; 
+		height: 80vh 	
+	}	
+} */
