@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Button, Textarea } from "@nextui-org/react";
+
 
 
 export default function ContactForm() {
@@ -43,7 +43,7 @@ export default function ContactForm() {
     <>
       <div className="contactForm">
         <form className="" onSubmit={submitHandler}>
-          <Input
+          <input
             isClearable
             size="lg"
             isRequired
@@ -55,7 +55,7 @@ export default function ContactForm() {
             onValueChange={setName}
             className="max-w-xs contactInputForm"
           />
-          <Input
+          <input
             isClearable
             size="lg"
             value={phone}
@@ -67,7 +67,7 @@ export default function ContactForm() {
             onValueChange={setPhone}
             className="max-w-xs contactInputForm"
           />
-          <Input
+          <input
             isClearable
             size="lg"
             isRequired
@@ -81,7 +81,7 @@ export default function ContactForm() {
             onValueChange={setMail}
             className="max-w-xs contactInputForm"
           />
-          <Textarea
+          <textarea
             variant="bordered"
             size="lg"
             placeholder="Escribinos tu mensaje..."
@@ -90,7 +90,7 @@ export default function ContactForm() {
             onValueChange={setMessage}
             className="max-w-xs contactInputForm"
           />
-          <Button type="submit" className="contactFormButton" size="md" color="default" variant="solid">Enviar</Button>
+          <button type="submit" className="contactFormButton" size="md" color="default" variant="solid">Enviar</button>
           {apiResponse ? apiResponse : ""}
         </form>
       </div>

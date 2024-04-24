@@ -1,4 +1,4 @@
-import { Button } from '@nextui-org/react'
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -10,7 +10,7 @@ export const Error404 = () => {
             </div>
             <div>
                 <Link to="/">
-                    <Button>Volver</Button>
+                    <button>Volver</button>
                 </Link>
             </div>
         </div>

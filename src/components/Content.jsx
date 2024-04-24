@@ -8,7 +8,7 @@ import { useGlobalState } from "../utils/GlobalStateContext";
 
 export const Content = (props) => {
   const [printedContent, setPrintedContent] = useState([]);
-  
+
   // Access Global State
   const { messages, setMessages, showQuestion, setShowQuestion } = useGlobalState();
 
@@ -17,18 +17,21 @@ export const Content = (props) => {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
   const handleQuestion1 = () => {
+    const question = { role: "user", content: question1, displayed: false }
     const newMessage = { role: "assistant", content: answerQuestion1, displayed: false };
-    setMessages([...messages, newMessage]);
+    setMessages([...messages, question, newMessage]);
   };
+  
   const handleQuestion2 = () => {
+    const question = { role: "user", content: question2, displayed: false }
     const newMessage = { role: "assistant", content: answerQuestion2, displayed: false };
-    setMessages([...messages, newMessage]);
+    setMessages([...messages, question, newMessage]);
   };
   const handleQuestion3 = () => {
+    const question = { role: "user", content: question3, displayed: false }
     const newMessage = { role: "assistant", content: answerQuestion3, displayed: false };
-    setMessages([...messages, newMessage]);
+    setMessages([...messages, question, newMessage]);
   };
 
   useEffect(() => {
@@ -59,7 +62,7 @@ export const Content = (props) => {
 
             // Printed words -> change questions to visible & save in local storage
             if (currentIndex === content.length) {
-              clearInterval(intervalId);         
+              clearInterval(intervalId);
               setShowQuestion("visible-question")
               localStorage.setItem("showQuestion", JSON.stringify(showQuestion));
             }

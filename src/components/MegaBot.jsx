@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Content } from "./Content";
 import send from "../assets/arrow-up-circle-solid.svg"
 import "./MegaBot.css"
+import axios from "axios"
 import chatbot from "../assets/Chatbot con headphones fondo blanco.jpeg";
 import { useGlobalState } from "../utils/GlobalStateContext";
 import { answerQuestion1, answerQuestion2, answerQuestion3, question1, question2, question3 } from "../utils/Questions";
@@ -21,16 +22,19 @@ const MegaBot = () => {
   const [numberOfMessages, setNumberOfMessages] = useState(1)
 
   const handleQuestion1 = () => {
+    const question = {role: "user", content: question1, displayed: false}
     const newMessage = { role: "assistant", content: answerQuestion1, displayed: false };
-    setMessages([...messages, newMessage]);
+    setMessages([...messages, question, newMessage]);
   };
   const handleQuestion2 = () => {
+    const question = {role: "user", content: question2, displayed: false}
     const newMessage = { role: "assistant", content: answerQuestion2, displayed: false };
-    setMessages([...messages, newMessage]);
+    setMessages([...messages, question, newMessage]);
   };
   const handleQuestion3 = () => {
+    const question = {role: "user", content: question3, displayed: false}
     const newMessage = { role: "assistant", content: answerQuestion3, displayed: false };
-    setMessages([...messages, newMessage]);
+    setMessages([...messages, question, newMessage]);
   };
 
   // For automatic scroll in the UI
@@ -39,48 +43,45 @@ const MegaBot = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Define user ID: if its not saved in localstorage create one with the timestamp
+  const idUser = localStorage.getItem("id_user") ? localStorage.getItem("id_user") : localStorage.setItem("id_user", Date.now())
+  
   const getMessages = async (event) => {
     event.preventDefault()
 
     //If there is a blanck return
     if (!input.trim()) return;
 
-    const newMessage = { role: "user", content: input }
+    //Object of the user message
+    const newMessage = {
+      role: "user", content: input, id_user: idUser, name: "Web User",
+      channel: "web"
+    }
     setMessages([...messages, newMessage]);
-
+    
     try {
-      const options = {
-        method: "POST",
-        body: JSON.stringify({
-          messages: [
-            {
-              role: "user",
-              content: input,
-            },
-          ],
-        }),
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
+      let data;
 
+      //Change typing state for visual effect && clean input
       setIsTyping(true);
       setInput("")
 
-      /*Uso el modelo tradicional*/
-      //const response = await fetch("http://localhost:4000/chatGpt/askChatGpt", options)
+      // If numberOfMessages (user typing a message) === 1; send messages completely to the API to save them
+      if (numberOfMessages === 1) {
+        let allMessages = messages
+        allMessages.push(newMessage)
+        const response = await axios.post(`${baseURL}/megabot`, { messages: allMessages });
+        data = response.data
 
-      /*Uso el modelo mío*/
-      const response = await fetch(
-        `${baseURL}/chatGpt/askMyChatGpt`,
-        options
-      );
-
-      const data = await response.json();
-
-      // Add displayed propertie so Content renders it
+      } else {
+        // Post to the API the last message of the user
+        const response = await axios.post(`${baseURL}/megabot`, { messages: newMessage });
+        data = response.data
+      }
+      // Add displayed propertie so Content renders it and others
       data.displayed = false
 
+      //Change states
       setMessages((prevMessages) => [...prevMessages, data]);
       setIsTyping(false);
       setNumberOfMessages(numberOfMessages + 1);
@@ -96,8 +97,6 @@ const MegaBot = () => {
     localStorage.setItem("messages", JSON.stringify(messages));
     scrollToBottom()
   }, [messages]);
-
-  //chatMessage.role === "user" ? "user-role" : "assistant-role"
 
   return (
     <div className="chat-container">

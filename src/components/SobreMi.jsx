@@ -6,7 +6,7 @@ const SobreMi = () => {
 
   // Access Global State && changed displayed propertie to true
   const { messages, setMessages } = useGlobalState();
-
+  
   useEffect(() => {
     if (messages && messages.length > 0) {
       const updatedMessages = [...messages];
@@ -35,7 +35,7 @@ const SobreMi = () => {
           Durante los años 2000 Internet provocó una revolución y cambió todo para siempre. Hoy, y más allá de las opiniones o gustos, el mundo va hacia el uso masivo de la Inteligencia Artificial y ya está provocando una nueva revolución en las industrias.
         </p>
         <p>
-          Creo que es momento de actuar rápido ante este nuevo escenario; y para esto estoy preparado para ayudar a las empresas en ese proceso de cambio aportando mi formación y experiencia.
+          Considero que es momento de actuar rápido ante este nuevo escenario; y para esto estoy preparado para ayudar a las empresas en ese proceso de cambio aportando mi formación y experiencia.
         </p>
         <br />
       </div>
