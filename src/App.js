@@ -7,8 +7,16 @@ import { Footer } from "./components/Footer";
 import "./App.css"
 import SobreMi from "./components/SobreMi";
 import { AgendarReunion } from "./components/AgendarReunion";
+import { useGlobalState } from "./utils/GlobalStateContext";
 
 export default function App() {
+	// Define user ID: if its not saved in localstorage create one
+	const idUser = localStorage.getItem("id_user") ? localStorage.getItem("id_user") : localStorage.setItem("id_user", Date.now())
+
+	// Access Global State and set the user id
+	const { setIdUser } = useGlobalState();
+	setIdUser(idUser)
+
 	return (
 		<>
 			<div className="grid">

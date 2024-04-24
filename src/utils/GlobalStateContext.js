@@ -5,9 +5,22 @@ const GlobalStateContext = createContext();
 
 export const useGlobalState = () => useContext(GlobalStateContext);
 
-const greeting = "¡Hola!👋 Soy MegaBot, Asistente virtual impulsado por Inteligencia Artificial entrenado para responder preguntas sobre como estos tipos de ChatBots pueden potenciar tu negocio. Para comenzar podes seleccionar una pregunta o directamente conversar. !Empecemos!"
- const questions = [{question: question1}, {question: question2}, {question: question3}]
-const initialState = [{ role: "assistant", content: greeting, isGreeting: true, displayed: false, questions: questions }]
+const greeting =
+	"¡Hola!👋 Soy MegaBot, Asistente virtual impulsado por Inteligencia Artificial entrenado para responder preguntas sobre como estos tipos de ChatBots pueden potenciar tu negocio. Para comenzar podes seleccionar una pregunta o directamente conversar. !Empecemos!";
+const questions = [
+	{ question: question1 },
+	{ question: question2 },
+	{ question: question3 },
+];
+const initialState = [
+	{
+		role: "assistant",
+		content: greeting,
+		isGreeting: true,
+		displayed: false,
+		questions: questions,
+	},
+];
 
 // Without local storage
 /* export const GlobalStateProvider = ({ children }) => {
@@ -23,18 +36,34 @@ const initialState = [{ role: "assistant", content: greeting, isGreeting: true, 
 
 // With local storage
 export const GlobalStateProvider = ({ children }) => {
-  const storedMessages = localStorage.getItem("messages");
-  const initialMessages = storedMessages ? JSON.parse(storedMessages) : initialState;
+	const storedMessages = localStorage.getItem("messages");
+	const initialMessages = storedMessages
+		? JSON.parse(storedMessages)
+		: initialState;
+	const [messages, setMessages] = useState(initialMessages);
 
-  const storedQuestion = localStorage.getItem("showQuestion");
-  let initialShowQuestion = storedQuestion ? JSON.parse(storedQuestion) : "hidden-question";
+	const storedIdUser = localStorage.getItem("id_user");
+	const initialIdUser = storedMessages ? JSON.parse(storedIdUser) : "";
+	const [idUser, setIdUser] = useState(initialIdUser);
 
-  const [messages, setMessages] = useState(initialMessages);
-  const [showQuestion, setShowQuestion] = useState(initialShowQuestion);
+	const storedQuestion = localStorage.getItem("showQuestion");
+	let initialShowQuestion = storedQuestion
+		? JSON.parse(storedQuestion)
+		: "hidden-question";
+	const [showQuestion, setShowQuestion] = useState(initialShowQuestion);
 
-  return (
-    <GlobalStateContext.Provider value={{ messages, setMessages, showQuestion, setShowQuestion }}>
-      {children}
-    </GlobalStateContext.Provider>
-  );
+	return (
+		<GlobalStateContext.Provider
+			value={{
+				messages,
+				setMessages,
+				idUser,
+				setIdUser,
+				showQuestion,
+				setShowQuestion,
+			}}
+		>
+			{children}
+		</GlobalStateContext.Provider>
+	);
 };

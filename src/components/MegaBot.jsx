@@ -12,27 +12,48 @@ const baseURL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_AP
 console.log("Apuntando a:", baseURL)
 
 const MegaBot = () => {
-
+  
   // Access Global State
-  const { messages, setMessages, showQuestion } = useGlobalState();
+  const { messages, setMessages, idUser, showQuestion } = useGlobalState();
 
   // Local States
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [numberOfMessages, setNumberOfMessages] = useState(1)
 
-  const handleQuestion1 = () => {
+  /* const handleQuestion1 = () => {
     const question = {role: "user", content: question1, displayed: false}
     const newMessage = { role: "assistant", content: answerQuestion1, displayed: false };
     setMessages([...messages, question, newMessage]);
+  }; */
+  const handleQuestion1 = async () => {
+    const question = { role: "user", content: question1, displayed: false, question: "question1" }
+    setMessages([...messages, question]);
+    try {
+      let data;
+      setIsTyping(true);
+      setInput("")
+      const response = await axios.post(`${baseURL}/megabot`, { messages: question });
+      data = response.data
+      data.displayed = false
+      setMessages((prevMessages) => [...prevMessages, data]);
+      setIsTyping(false);
+      setNumberOfMessages(numberOfMessages + 1);
+    } catch (error) {
+      console.log(error);
+      const errorMessage = { role: "assistant", content: "¡Disculpas, hubo un error, por favor intentá más tarde! ¡Gracias!", displayed: false }
+      setIsTyping(false);
+      setMessages((prevMessages) => [...prevMessages, errorMessage]);
+    }
   };
+
   const handleQuestion2 = () => {
-    const question = {role: "user", content: question2, displayed: false}
+    const question = { role: "user", content: question2, displayed: false }
     const newMessage = { role: "assistant", content: answerQuestion2, displayed: false };
     setMessages([...messages, question, newMessage]);
   };
   const handleQuestion3 = () => {
-    const question = {role: "user", content: question3, displayed: false}
+    const question = { role: "user", content: question3, displayed: false }
     const newMessage = { role: "assistant", content: answerQuestion3, displayed: false };
     setMessages([...messages, question, newMessage]);
   };
@@ -43,9 +64,6 @@ const MegaBot = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Define user ID: if its not saved in localstorage create one with the timestamp
-  const idUser = localStorage.getItem("id_user") ? localStorage.getItem("id_user") : localStorage.setItem("id_user", Date.now())
-  
   const getMessages = async (event) => {
     event.preventDefault()
 
@@ -58,7 +76,7 @@ const MegaBot = () => {
       channel: "web"
     }
     setMessages([...messages, newMessage]);
-    
+
     try {
       let data;
 
