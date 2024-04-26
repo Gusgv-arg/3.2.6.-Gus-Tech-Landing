@@ -1,24 +1,17 @@
 import React, { createContext, useContext, useState } from "react";
-import { question1, question2, question3 } from "./Questions";
 
 const GlobalStateContext = createContext();
 
 export const useGlobalState = () => useContext(GlobalStateContext);
 
-const greeting =
-	"¡Hola!👋 Soy MegaBot, Asistente virtual impulsado por Inteligencia Artificial entrenado para responder preguntas sobre como estos tipos de ChatBots pueden potenciar tu negocio. Para comenzar podes seleccionar una pregunta o directamente conversar. !Empecemos!";
-const questions = [
-	{ question: question1 },
-	{ question: question2 },
-	{ question: question3 },
-];
+const greeting ="¡Hola!👋 Soy MegaBot, Asistente virtual impulsado por Inteligencia Artificial entrenado para responder preguntas sobre como estos tipos de ChatBots pueden potenciar tu negocio. Para comenzar podes seleccionar una pregunta o directamente conversar. !Empecemos!";
+
 const initialState = [
 	{
 		role: "assistant",
 		content: greeting,
 		isGreeting: true,
-		displayed: false,
-		questions: questions,
+		displayed: false
 	},
 ];
 
@@ -42,8 +35,9 @@ export const GlobalStateProvider = ({ children }) => {
 		: initialState;
 	const [messages, setMessages] = useState(initialMessages);
 
+	// Define user ID: if its not saved in localstorage create one
 	const storedIdUser = localStorage.getItem("id_user");
-	const initialIdUser = storedMessages ? JSON.parse(storedIdUser) : "";
+	const initialIdUser = storedIdUser ? JSON.parse(storedIdUser) : localStorage.setItem("id_user", Date.now());
 	const [idUser, setIdUser] = useState(initialIdUser);
 
 	const storedQuestion = localStorage.getItem("showQuestion");
@@ -51,7 +45,7 @@ export const GlobalStateProvider = ({ children }) => {
 		? JSON.parse(storedQuestion)
 		: "hidden-question";
 	const [showQuestion, setShowQuestion] = useState(initialShowQuestion);
-
+		
 	return (
 		<GlobalStateContext.Provider
 			value={{

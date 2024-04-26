@@ -11,12 +11,11 @@ export const HomeScreen = () => {
 				<img
 					src={personaje}
 					alt="personaje"					
-					className="animate__animated animate__bounce animate__delay-4s image"	
-									
+					className="animate__animated animate__bounce animate__delay-4s image"									
 				/>
 			</div>
 			<div className='megabot'>
-				<MegaBot />
+				<MegaBot />				
 			</div>
 		</div>
 	)

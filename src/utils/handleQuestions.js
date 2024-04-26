@@ -5,7 +5,13 @@ const baseURL =
 		? process.env.REACT_APP_API_URL_PROD
 		: process.env.REACT_APP_API_URL_LOCAL;
 
-export const handleQuestions = async (idUser, question, idQuestion, messages, setMessages) => {
+export const handleQuestions = async (
+	idUser,
+	question,
+	idQuestion,
+	messages,
+	setMessages
+) => {
 	const newMessage = {
 		id_user: idUser,
 		name: "Web User",
@@ -15,21 +21,15 @@ export const handleQuestions = async (idUser, question, idQuestion, messages, se
 		displayed: false,
 		question: idQuestion,
 	};
-	setMessages([...messages, newMessage ]);
+	setMessages([...messages, newMessage]);
 	try {
 		let data;
-		//setIsTyping(true);
-		//setInput("")
 		const response = await axios.post(`${baseURL}/megabot`, {
 			messages: newMessage,
 		});
 		data = response.data;
 		data.displayed = false;
-		console.log("respuesta api", data)
-		return data
-		//setMessages((prevMessages) => [...prevMessages, data]);
-		//setIsTyping(false);
-		//setNumberOfMessages(numberOfMessages + 1);
+		return data;
 	} catch (error) {
 		console.log(error);
 		const errorMessage = {
@@ -38,7 +38,6 @@ export const handleQuestions = async (idUser, question, idQuestion, messages, se
 				"¡Disculpas, hubo un error, por favor intentá más tarde! ¡Gracias!",
 			displayed: false,
 		};
-		//setIsTyping(false);
 		setMessages((prevMessages) => [...prevMessages, errorMessage]);
 	}
 };

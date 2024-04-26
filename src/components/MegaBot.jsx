@@ -6,13 +6,14 @@ import "./MegaBot.css"
 import axios from "axios"
 import chatbot from "../assets/Chatbot con headphones fondo blanco.jpeg";
 import { useGlobalState } from "../utils/GlobalStateContext";
-import { answerQuestion1, answerQuestion2, answerQuestion3, question1, question2, question3 } from "../utils/Questions";
+import { question1, question2, question3 } from "../utils/Questions";
+import { handleQuestions } from "../utils/handleQuestions";
 
 const baseURL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_LOCAL;
 console.log("Apuntando a:", baseURL)
 
 const MegaBot = () => {
-  
+
   // Access Global State
   const { messages, setMessages, idUser, showQuestion } = useGlobalState();
 
@@ -20,42 +21,24 @@ const MegaBot = () => {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [numberOfMessages, setNumberOfMessages] = useState(1)
-
-  /* const handleQuestion1 = () => {
-    const question = {role: "user", content: question1, displayed: false}
-    const newMessage = { role: "assistant", content: answerQuestion1, displayed: false };
-    setMessages([...messages, question, newMessage]);
-  }; */
-  const handleQuestion1 = async () => {
-    const question = { role: "user", content: question1, displayed: false, question: "question1" }
-    setMessages([...messages, question]);
-    try {
-      let data;
-      setIsTyping(true);
-      setInput("")
-      const response = await axios.post(`${baseURL}/megabot`, { messages: question });
-      data = response.data
-      data.displayed = false
-      setMessages((prevMessages) => [...prevMessages, data]);
-      setIsTyping(false);
-      setNumberOfMessages(numberOfMessages + 1);
-    } catch (error) {
-      console.log(error);
-      const errorMessage = { role: "assistant", content: "¡Disculpas, hubo un error, por favor intentá más tarde! ¡Gracias!", displayed: false }
-      setIsTyping(false);
-      setMessages((prevMessages) => [...prevMessages, errorMessage]);
-    }
+  
+  // For answering initial questions
+  const handleClickQuestion1 = async () => {
+    const idQuestion = "question1"
+    const response = await handleQuestions(idUser, question1, idQuestion, messages, setMessages);
+    setMessages((prevMessages) => [...prevMessages, response])
   };
-
-  const handleQuestion2 = () => {
-    const question = { role: "user", content: question2, displayed: false }
-    const newMessage = { role: "assistant", content: answerQuestion2, displayed: false };
-    setMessages([...messages, question, newMessage]);
+  
+  const handleClickQuestion2 = async () => {
+    const idQuestion = "question2"
+    const response = await handleQuestions(idUser, question2, idQuestion, messages, setMessages);
+    setMessages((prevMessages) => [...prevMessages, response])
   };
-  const handleQuestion3 = () => {
-    const question = { role: "user", content: question3, displayed: false }
-    const newMessage = { role: "assistant", content: answerQuestion3, displayed: false };
-    setMessages([...messages, question, newMessage]);
+  
+  const handleClickQuestion3 = async () => {
+    const idQuestion = "question3"
+    const response = await handleQuestions(idUser, question3, idQuestion, messages, setMessages);
+    setMessages((prevMessages) => [...prevMessages, response])
   };
 
   // For automatic scroll in the UI
@@ -66,7 +49,7 @@ const MegaBot = () => {
 
   const getMessages = async (event) => {
     event.preventDefault()
-
+    
     //If there is a blanck return
     if (!input.trim()) return;
 
@@ -79,18 +62,18 @@ const MegaBot = () => {
 
     try {
       let data;
-
+      
       //Change typing state for visual effect && clean input
       setIsTyping(true);
       setInput("")
-
+      
       // If numberOfMessages (user typing a message) === 1; send messages completely to the API to save them
       if (numberOfMessages === 1) {
         let allMessages = messages
         allMessages.push(newMessage)
         const response = await axios.post(`${baseURL}/megabot`, { messages: allMessages });
         data = response.data
-
+        
       } else {
         // Post to the API the last message of the user
         const response = await axios.post(`${baseURL}/megabot`, { messages: newMessage });
@@ -98,7 +81,7 @@ const MegaBot = () => {
       }
       // Add displayed propertie so Content renders it and others
       data.displayed = false
-
+      
       //Change states
       setMessages((prevMessages) => [...prevMessages, data]);
       setIsTyping(false);
@@ -110,7 +93,7 @@ const MegaBot = () => {
       setMessages((prevMessages) => [...prevMessages, errorMessage]);
     }
   };
-
+  
   useEffect(() => {
     localStorage.setItem("messages", JSON.stringify(messages));
     scrollToBottom()
@@ -120,6 +103,7 @@ const MegaBot = () => {
     <div className="chat-container">
 
       <div className="scroll">
+
         {messages[messages.length - 1].displayed === true ? messages.map((chatMessage, index) => (
           <div>
             <div className={chatMessage.role === "assistant" ? "assistant-role" : "user-role"}
@@ -134,9 +118,9 @@ const MegaBot = () => {
 
             {index === 0 && (<>
               <div className="questions-container">
-                <span className="questions"><button onClick={handleQuestion1} className={showQuestion}>{question1}</button></span>
-                <span className="questions"><button onClick={handleQuestion2} className={showQuestion}>{question2} </button></span>
-                <span className="questions"><button onClick={handleQuestion3} className={showQuestion}>{question3}</button></span>
+                <span className="questions"><button onClick={handleClickQuestion1} className={showQuestion}>{question1}</button></span>
+                <span className="questions"><button onClick={handleClickQuestion2} className={showQuestion}>{question2} </button></span>
+                <span className="questions"><button onClick={handleClickQuestion3} className={showQuestion}>{question3}</button></span>
               </div>
             </>
             )}
@@ -162,7 +146,6 @@ const MegaBot = () => {
           </button>
         </form>
       </div>
-
     </div>
   );
 };

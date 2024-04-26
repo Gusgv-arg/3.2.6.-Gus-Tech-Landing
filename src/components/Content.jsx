@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "animate.css"
 import chatbot from "../assets/Chatbot con headphones fondo blanco.jpeg";
-import { question1, answerQuestion1, question2, answerQuestion2, question3, answerQuestion3 } from "../utils/Questions";
+import { question1, question2, question3 } from "../utils/Questions";
 import { useGlobalState } from "../utils/GlobalStateContext";
 import { handleQuestions } from "../utils/handleQuestions";
-
 
 export const Content = (props) => {
   const [printedContent, setPrintedContent] = useState([]);
@@ -17,38 +16,26 @@ export const Content = (props) => {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-  /* const handleQuestion1 = () => {
-    const question = { role: "user", content: question1, displayed: false }
-    const newMessage = { role: "assistant", content: answerQuestion1, displayed: false };
-    setMessages([...messages, question, newMessage]);
-  }; */
+
+  // For answering initial questions
   const handleClickQuestion1 = async () => {
     const idQuestion = "question1"
     const response = await handleQuestions(idUser, question1, idQuestion, messages, setMessages);
     setMessages((prevMessages) => [...prevMessages, response])
   };
 
-  /* const handleQuestion2 = () => {
-    const question = { role: "user", content: question2, displayed: false }
-    const newMessage = { role: "assistant", content: answerQuestion2, displayed: false };
-    setMessages([...messages, question, newMessage]);
-  }; */
   const handleClickQuestion2 = async () => {
     const idQuestion = "question2"
     const response = await handleQuestions(idUser, question2, idQuestion, messages, setMessages);
     setMessages((prevMessages) => [...prevMessages, response])
   };
 
-  /* const handleQuestion3 = () => {
-    const question = { role: "user", content: question3, displayed: false }
-    const newMessage = { role: "assistant", content: answerQuestion3, displayed: false };
-    setMessages([...messages, question, newMessage]);
-  }; */
   const handleClickQuestion3 = async () => {
     const idQuestion = "question3"
     const response = await handleQuestions(idUser, question3, idQuestion, messages, setMessages);
     setMessages((prevMessages) => [...prevMessages, response])
   };
+
   useEffect(() => {
     let lastAssistantMessage
     let intervalId;
@@ -66,7 +53,6 @@ export const Content = (props) => {
 
           const content = lastAssistantMessage.content.split("");
           let currentIndex = 0;
-
           intervalId = setInterval(() => {
             setPrintedContent((prevContent) => {
               const newContent = [...prevContent];
