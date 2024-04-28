@@ -9,8 +9,10 @@ import { useGlobalState } from "../utils/GlobalStateContext";
 import { question1, question2, question3 } from "../utils/Questions";
 import { handleQuestions } from "../utils/handleQuestions";
 
-const baseURL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_LOCAL;
+//const baseURL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_LOCAL;
+const baseURL = process.env.REACT_APP_API_URL_PROD ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_LOCAL;
 console.log("Apuntando a:", baseURL)
+console.log(process.env.NODE_ENV)
 
 const MegaBot = () => {
 
