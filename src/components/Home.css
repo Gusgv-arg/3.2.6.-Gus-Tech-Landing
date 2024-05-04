@@ -13,11 +13,22 @@
 	width: 30vw;
 	margin: auto;	
 }
-@media (max-width: 699px) {
-    .image {
-        display: none;
-    }
+
+
+@media (width< 700px) {
+	.image {
+		display: none;
+	}
+	.homeContainer {
+		width: 350px;
+		margin: 2rem 0 0 0;
+		height: 650px;
+		box-sizing: border-box;
+		
+	}
+
 }
+
 /* GRID */
 /* .homeContainer {
     background-color: rgb(125, 95, 158); 

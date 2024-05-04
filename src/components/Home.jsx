@@ -14,7 +14,7 @@ export const HomeScreen = () => {
 					className="animate__animated animate__bounce animate__delay-4s image"									
 				/>
 			</div>
-			<div className='megabot'>
+			<div>
 				<MegaBot />				
 			</div>
 		</div>

@@ -1,11 +1,11 @@
 .chat-container {
-	width: 100%;
-	/* background-color: rgb(193, 154, 97); */
+	width: 98%;
+	background-color: rgb(193, 154, 97);
 	overflow: hidden;
-	height: 70vh;
+	height: 75vh;
 	display: flex;
 	flex-direction: column;
-	margin-top:1rem
+	margin:1rem 
 }
 .scroll {
 	/* border: solid; */
@@ -14,7 +14,7 @@
 	margin-bottom: 20px;
 	scrollbar-width: none;
 	height: 80%;
-	max-height: 80%;
+	max-height: 80%;	
 }
 /* Oculta los scrollbars en Webkit (Chrome, Safari, etc.) */
 .scroll::-webkit-scrollbar {
@@ -52,7 +52,7 @@
 	justify-content: center;
 	align-content: center;
 	gap: 1rem;
-	margin-top:0.5rem	
+	margin-top:1.2rem	
 }
 .hidden-question {
 	visibility: hidden;
@@ -75,17 +75,17 @@
 	height: 20%;
 	max-height: 20%;
 	/* background-color: chartreuse; */
-	width: 100%;
 	display: flex;
 	align-items: center;
+	justify-content: right;
+	width: 100%;	
 }
 .formulario {
 	display: flex;
-	/* background-color: beige; */
-	width: 80%;
+	background-color: beige;
+	width: 35rem;
 	min-width: 21rem;
-	margin: auto;
-	
+	margin: auto	
 }
 .inputText {
 	height: 1.6rem;
@@ -142,15 +142,20 @@ inputText:focus {
 	animation: blink 1s infinite;
 	color: black;
 	font-weight: bolder;
-}
+} 
 @media (width<700px){
 	.chat-container {
-		width: 100%;
+		width: 350px;
 		/* background-color: rgb(193, 154, 97); */
 		overflow: hidden;
-		height: 80vh;
+		height: 650px;
 		display: flex;
 		flex-direction: column;
-		
-	}	
+		margin: 0; 
+				
+	}
+	
+	.assistant-role {
+	
+	}
 }

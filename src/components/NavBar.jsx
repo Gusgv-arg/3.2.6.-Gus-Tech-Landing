@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom"
 import { useState } from "react";
 import "./NavBar.css"
+import "animate.css"
 
 export const NavBar = (props) => {
     const [activeLink, setActiveLink] = useState("");
@@ -12,8 +13,8 @@ export const NavBar = (props) => {
             <div className="nav-container">
                 <div>
                     <Link to="/" >
-                        <div>
-                           <span>MegaBot</span>
+                        <div className="animate__animated animate__bounceInLeft">
+                           <span >MegaBot</span><span className="claim"> - Soluciones de IA</span>
                         </div>
                     </Link >
                 </div>

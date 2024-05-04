@@ -8,10 +8,11 @@
 .contenido {
 	background-color: rgb(92, 90, 87);
 	color: white;
-	padding: 1.8rem ;
+	padding: 1.9rem ;
 	height: 90%;
 	overflow-y: auto;
 	width: 90%;
+	align-content: center;
 }
 .contenido p {
 	margin-top: 0.5rem;

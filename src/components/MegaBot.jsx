@@ -9,7 +9,6 @@ import { useGlobalState } from "../utils/GlobalStateContext";
 import { question1, question2, question3 } from "../utils/Questions";
 import { handleQuestions } from "../utils/handleQuestions";
 
-//const baseURL = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_LOCAL;
 const baseURL = process.env.REACT_APP_API_URL_PROD ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_LOCAL;
 console.log("Apuntando a:", baseURL)
 console.log(process.env.NODE_ENV)
@@ -69,18 +68,10 @@ const MegaBot = () => {
       setIsTyping(true);
       setInput("")
       
-      // If numberOfMessages (user typing a message) === 1; send messages completely to the API to save them
-      if (numberOfMessages === 1) {
-        let allMessages = messages
-        allMessages.push(newMessage)
-        const response = await axios.post(`${baseURL}/megabot`, { messages: allMessages });
-        data = response.data
-        
-      } else {
-        // Post to the API the last message of the user
-        const response = await axios.post(`${baseURL}/megabot`, { messages: newMessage });
-        data = response.data
-      }
+      // Post to the API the last message of the user
+      const response = await axios.post(`${baseURL}/megabot`, { messages: newMessage });
+      data = response.data
+      
       // Add displayed propertie so Content renders it and others
       data.displayed = false
       
@@ -141,8 +132,8 @@ const MegaBot = () => {
             className={`${isTyping ? 'typing inputText' : 'inputText'}`}
             value={isTyping ? "Buscando en mi base de conocimiento..." : input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Preguntale a MegaBot..."
-          />
+            placeholder="Preguntale a MegaBot..."            
+          />          
           <button type="submit" className={input ? "submitButton" : "submitButtonWithNoInput"} disabled={!input}>
             <img alt="send" src={send} className="img-button" />
           </button>

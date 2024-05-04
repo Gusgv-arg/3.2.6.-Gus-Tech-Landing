@@ -1,7 +1,6 @@
 import React from 'react'
 import "./AgendarReunion.css"
 import Calendly from './Calendly';
-import TidyCal from './TidyCal';
 
 export const AgendarReunion = () => {
 
