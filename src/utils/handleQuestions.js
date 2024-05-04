@@ -35,6 +35,6 @@ export const handleQuestions = async (
 				"¡Disculpas, hubo un error, por favor intentá más tarde! ¡Gracias!",
 			displayed: false,
 		};
-		setMessages((prevMessages) => [...prevMessages, errorMessage]);
+		return errorMessage;
 	}
 };

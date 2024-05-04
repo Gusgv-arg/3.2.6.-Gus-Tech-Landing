@@ -25,7 +25,7 @@ export default function App() {
 					</Routes>
 				</main>
 
-				<footer className="footer">
+				<footer>
 					<Footer />
 				</footer>
 			</div>

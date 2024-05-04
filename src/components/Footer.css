@@ -3,8 +3,7 @@
 	justify-content: left;
 	margin: 2rem 6rem 0 ;
 	font-size: 0.7rem;
-    /* background-color: cadetblue; */
-	
+    /* background-color: cadetblue;  */	
 }
 .contactos a {
 	padding: 10px;
@@ -14,22 +13,24 @@
 .contactos a:hover {	
 	font-weight: bold;
 }
+.contactos i {
+	margin-right: 0.3rem;
+}
 .whatsapp {
 	color: green;
 	font-weight: bold;
 }
-@media (width<700px){
+@media (max-width: 700px){
 	.contactos {
-		display: flex;	
-		flex-direction: column;	
-		justify-content: center;
+		display: block;
 		font-size: 0.7rem;
-		margin-left: 10px;
+		/* background-color: beige; */
 		width: 350px;
-	}	
-	.contactos a {
+		margin: 0rem 0.5rem;
 		padding: 5px;
-		font-size: 0.7rem;
-		text-decoration: none;
 	}
+	.contactos a:hover {	
+		font-weight: bold;
+	}	
+	
 }
