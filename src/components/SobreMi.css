@@ -17,7 +17,7 @@
 .contenido p {
 	margin-top: 0.5rem;
 }
-@media (width<400px) {
+@media (width<700px) {
 	.sobremi {
 		display: flex;
 		align-items: center;

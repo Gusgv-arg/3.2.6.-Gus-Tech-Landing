@@ -1,6 +1,6 @@
 .chat-container {
 	width: 98%;
-	background-color: rgb(193, 154, 97);
+	/* background-color: rgb(193, 154, 97); */
 	overflow: hidden;
 	height: 75vh;
 	display: flex;
@@ -82,7 +82,7 @@
 }
 .formulario {
 	display: flex;
-	background-color: beige;
+	/* background-color: beige; */
 	width: 35rem;
 	min-width: 21rem;
 	margin: auto	
@@ -151,11 +151,10 @@ inputText:focus {
 		height: 650px;
 		display: flex;
 		flex-direction: column;
-		margin: 0; 
-				
-	}
-	
-	.assistant-role {
-	
+		margin: 0; 		
+	}	
+	.inputText{
+		width: 20rem;
+		margin-left: 30px;
 	}
 }

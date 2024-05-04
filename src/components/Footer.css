@@ -20,16 +20,16 @@
 }
 @media (width<700px){
 	.contactos {
-		display: flex;		
+		display: flex;	
+		flex-direction: column;	
 		justify-content: center;
 		font-size: 0.7rem;
-		background-color: cadetblue;
-		margin: 0;
+		margin-left: 10px;
 		width: 350px;
 	}	
 	.contactos a {
-		padding: 3px;
-		font-size: 0.5rem;
+		padding: 5px;
+		font-size: 0.7rem;
 		text-decoration: none;
 	}
 }
