@@ -11,10 +11,9 @@
 	/* border: solid; */
 	width: fit-content;
 	overflow-y: auto;
-	margin-bottom: 20px;
 	scrollbar-width: none;
-	height: 80%;
-	max-height: 80%;	
+	height: 90%;
+	max-height: 90%;	
 }
 /* Oculta los scrollbars en Webkit (Chrome, Safari, etc.) */
 .scroll::-webkit-scrollbar {
@@ -72,8 +71,8 @@
 	color: white;
 }
 .inputContainer {
-	height: 20%;
-	max-height: 20%;
+	height: 10%;
+	max-height: 10%;
 	/* background-color: chartreuse; */
 	display: flex;
 	align-items: center;

@@ -65,7 +65,7 @@ export const Content = (props) => {
             if (currentIndex === content.length) {
               clearInterval(intervalId);
               setShowQuestion("visible-question")
-              localStorage.setItem("showQuestion", JSON.stringify(showQuestion));
+              localStorage.setItem("showQuestion", JSON.stringify("visible-question"));
             }
           }, 10);
         }
