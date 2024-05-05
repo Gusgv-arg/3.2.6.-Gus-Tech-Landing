@@ -45,7 +45,8 @@ export const GlobalStateProvider = ({ children }) => {
 		? JSON.parse(storedQuestion)
 		: "hidden-question";
 	const [showQuestion, setShowQuestion] = useState(initialShowQuestion);
-		
+	
+	const [isTyping, setIsTyping] = useState(false) 
 	return (
 		<GlobalStateContext.Provider
 			value={{
@@ -55,6 +56,8 @@ export const GlobalStateProvider = ({ children }) => {
 				setIdUser,
 				showQuestion,
 				setShowQuestion,
+				isTyping,
+				setIsTyping
 			}}
 		>
 			{children}

@@ -9,7 +9,7 @@ export const Content = (props) => {
   const [printedContent, setPrintedContent] = useState([]);
 
   // Access Global State
-  const { messages, setMessages, idUser, showQuestion, setShowQuestion } = useGlobalState();
+  const { messages, setMessages, idUser, showQuestion, setShowQuestion, setIsTyping } = useGlobalState();
 
   // For automatic scroll in the UI
   const messagesEndRef = React.useRef(null);
@@ -19,21 +19,27 @@ export const Content = (props) => {
 
   // For answering initial questions
   const handleClickQuestion1 = async () => {
+    setIsTyping(true);
     const idQuestion = "question1"
     const response = await handleQuestions(idUser, question1, idQuestion, messages, setMessages);
     setMessages((prevMessages) => [...prevMessages, response])
+    setIsTyping(false);
   };
 
   const handleClickQuestion2 = async () => {
+    setIsTyping(true);
     const idQuestion = "question2"
     const response = await handleQuestions(idUser, question2, idQuestion, messages, setMessages);
     setMessages((prevMessages) => [...prevMessages, response])
+    setIsTyping(false);
   };
 
   const handleClickQuestion3 = async () => {
+    setIsTyping(true);
     const idQuestion = "question3"
     const response = await handleQuestions(idUser, question3, idQuestion, messages, setMessages);
     setMessages((prevMessages) => [...prevMessages, response])
+    setIsTyping(false);
   };
 
   useEffect(() => {

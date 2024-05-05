@@ -16,11 +16,10 @@ console.log(process.env.NODE_ENV)
 const MegaBot = () => {
 
   // Access Global State
-  const { messages, setMessages, idUser, showQuestion } = useGlobalState();
+  const { messages, setMessages, idUser, showQuestion, isTyping, setIsTyping } = useGlobalState();
 
   // Local States
   const [input, setInput] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
   const [numberOfMessages, setNumberOfMessages] = useState(1)
   
   // For answering initial questions
