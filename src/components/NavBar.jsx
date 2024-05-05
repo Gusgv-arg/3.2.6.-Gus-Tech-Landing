@@ -14,7 +14,7 @@ export const NavBar = (props) => {
                 <div>
                     <Link to="/" >
                         <div className="animate__animated animate__bounceInLeft">
-                           <span >MegaBot</span><span className="claim"> - Soluciones de IA</span>
+                           <span className="megabot">MegaBot</span><span className="claim"> - Soluciones de IA</span>
                         </div>
                     </Link >
                 </div>

@@ -144,16 +144,24 @@ inputText:focus {
 } 
 @media (width<700px){
 	.chat-container {
-		width: 350px;
+		width: 320px;
+		height: 580px;
 		/* background-color: rgb(193, 154, 97); */
 		overflow: hidden;
-		height: 650px;
 		display: flex;
 		flex-direction: column;
-		margin: 0; 		
+		margin-top: 40px; 		
 	}	
 	.inputText{
 		width: 20rem;
 		margin-left: 30px;
+	}
+	.assistant-role {
+		margin: 0;
+	}
+	.user-role {
+		margin: auto;
+		max-width: 310px;
+
 	}
 }
