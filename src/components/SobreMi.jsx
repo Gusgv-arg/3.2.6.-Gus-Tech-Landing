@@ -22,10 +22,10 @@ const SobreMi = () => {
         Hola, mi nombre es Gustavo Gómez Villafañe de Argentina. Soy Licenciado en Administración de Empresas con un MBA y Desarrollador especializado en Inteligencia Artificial.
       </p>
       <p>
-        Trabajé más de 25 años en multinacionales del rubro automotriz, en donde ocupé diversos puestos en el área comercial llegando a puestos de gerenciales.
+        Trabajé más de 25 años en multinacionales del rubro automotriz, en donde ocupé diversos puestos en el área comercial llegando a ocupar puestos de Gerencia en Desarrollo de Red y en Calidad de Servicio.
       </p>
       <p>
-        En los comienzos de mi carrera profesional, también estudié programación y pude comprobar los beneficios de la tecnología aplicada a los procesos automatizando muchas tareas manuales. 
+        En los comienzos de mi carrera profesional, también estudié programación y pude comprobar los beneficios de la tecnología aplicada a los procesos logrando automatizar muchas tareas. 
       </p>
       <p>
         Mi carrera siguió, y ahora como emprendedor independiente, hace 2 años retomé mi pasión por la Programación teniendo que actualizarme en las nuevas tecnologías.
