@@ -19,6 +19,7 @@
 .scroll::-webkit-scrollbar {
 	display: none;
 }
+
 .chatbot-image {
 	margin-right: 0.2rem;
 	width: 1.5rem;

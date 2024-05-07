@@ -108,9 +108,9 @@ export const Content = (props) => {
           </>
           )}
           <br></br>
-          <div ref={messagesEndRef} />
         </div>
       ))}
+      <div className="endRef" ref={messagesEndRef} />
     </>
   );
 };
