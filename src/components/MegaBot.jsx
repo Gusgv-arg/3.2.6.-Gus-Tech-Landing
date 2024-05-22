@@ -1,10 +1,11 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Content } from "./Content";
 import send from "../assets/arrow-up-circle-solid.svg"
 import "./MegaBot.css"
 import axios from "axios"
 import chatbot from "../assets/Chatbot con headphones fondo blanco.jpeg";
+import attach from "../assets/AkarIconsAttach.svg"
 import { useGlobalState } from "../utils/GlobalStateContext";
 import { question1, question2, question3 } from "../utils/Questions";
 import { handleQuestions } from "../utils/handleQuestions";
@@ -45,6 +46,14 @@ const MegaBot = () => {
     const response = await handleQuestions(idUser, question3, idQuestion, messages, setMessages);
     setMessages((prevMessages) => [...prevMessages, response])
     setIsTyping(false)
+  };
+  
+  //For attachment
+  const fileInputRef = useRef(null);
+  
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    console.log(file); // Aquí puedes manejar el archivo, por ejemplo, guardarlo en el estado o enviarlo a un servidor
   };
 
   // For automatic scroll in the UI
@@ -138,6 +147,18 @@ const MegaBot = () => {
             value={isTyping ? "Buscando en mi base de conocimiento..." : input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Preguntale a MegaBot..."
+          />
+          <input
+            type="file"
+            style={{ display: 'none' }}
+            ref={fileInputRef} // Referencia para activar el clic
+            onChange={handleFileChange}
+          />
+          <img
+            src={attach}
+            alt="Attach file"
+            onClick={() => fileInputRef.current.click()} // Simula un clic en el input de tipo file
+            className="attachButton"
           />
           <button type="submit" className={input ? "submitButton" : "submitButtonWithNoInput"} disabled={!input}>
             <img alt="send" src={send} className="img-button" />

@@ -83,31 +83,41 @@
 .formulario {
 	display: flex;
 	/* background-color: beige; */
-	width: 35rem;
+	width: 38rem;
 	min-width: 21rem;
-	margin: auto	
-}
-.inputText {
-	height: 1.6rem;
-	padding: 1rem;
+	margin: auto;
+	border: solid;	
 	border-radius: 10px;
 	border-width: 0.5px;
+}
+.formulario:focus-within {
+	border-width: 2px;	
+}
+.inputText {
+	height: 1.4rem;
+	padding: 1rem 2.5rem;
+	border-radius: 10px;
 	width: 100%;
+	border: none
+}
+.inputText:focus{
+	outline: none;
 }
 .submitButton {
 	cursor: pointer;
 	border: none;
 	background-color: transparent;
 	position: relative;
-	right: 2rem;
+	right: 0.5rem;
 	padding-top: 0.2rem;
+	
 }
 .submitButtonWithNoInput {
 	border: none;
 	background-color: transparent;
 	opacity: 30%;
 	position: relative;
-	right: 2rem;
+	right: 0.5rem;
 	padding-top: 0.2rem;
 }
 .submitButtonWithNoInput[disabled]:hover::before {
@@ -123,8 +133,10 @@
 .img-button {
 	width: 100%;
 }
-inputText:focus {
-	outline: none;
+.attachButton {
+	position: relative;
+	right: 34.5rem;
+	cursor: pointer	
 }
 
 @keyframes blink {

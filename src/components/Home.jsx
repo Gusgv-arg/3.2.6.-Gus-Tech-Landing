@@ -3,6 +3,7 @@ import personaje from "../assets/Personaje.jpeg";
 import "animate.css"
 import MegaBot from './MegaBot';
 import "./Home.css"
+import MegaBot2 from './MegaBot2';
 
 export const HomeScreen = () => {
 	return (
@@ -15,7 +16,8 @@ export const HomeScreen = () => {
 				/>
 			</div>
 			<div>
-				<MegaBot />				
+				{/* <MegaBot /> */}				
+				<MegaBot2 />				
 			</div>
 		</div>
 	)
