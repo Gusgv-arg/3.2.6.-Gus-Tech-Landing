@@ -36,6 +36,7 @@
 }
 .user-role {
 	display: flex;
+	align-items: center;
 	background-color: rgb(221, 234, 221);
 	color: black;
 	width: fit-content;
@@ -102,6 +103,17 @@
 }
 .inputText:focus{
 	outline: none;
+}
+.img-preview {
+	height: 25px;
+	width: 25px;
+	margin: auto
+}
+.img-view {
+	height: 3rem;
+	width: 3rem;
+	margin: auto;
+	padding: 0.2rem;
 }
 .submitButton {
 	cursor: pointer;

@@ -3,7 +3,6 @@ import personaje from "../assets/Personaje.jpeg";
 import "animate.css"
 import MegaBot from './MegaBot';
 import "./Home.css"
-import MegaBot2 from './MegaBot2';
 
 export const HomeScreen = () => {
 	return (
@@ -15,9 +14,8 @@ export const HomeScreen = () => {
 					className="animate__animated animate__bounce animate__delay-4s image"									
 				/>
 			</div>
-			<div>
-				{/* <MegaBot /> */}				
-				<MegaBot2 />				
+			<div>				
+				<MegaBot/>				
 			</div>
 		</div>
 	)

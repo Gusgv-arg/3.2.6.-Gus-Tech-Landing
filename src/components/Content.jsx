@@ -97,6 +97,7 @@ export const Content = (props) => {
               className="chatbot-image"
             />}
             <span>{chatMessage.role === "assistant" && index === props.messages.length - 1 ? printedContent[index] : chatMessage.content}</span>
+            {chatMessage.image ? <img src={chatMessage.image} className="img-view" alt="chat-img" /> : null}
           </div>
 
           {index === 0 && (<>
