@@ -14,7 +14,7 @@ const baseURL = process.env.REACT_APP_API_URL_PROD ? process.env.REACT_APP_API_U
 console.log("Apuntando a:", baseURL)
 console.log(process.env.NODE_ENV)
 
-const MegaBot3 = () => {
+const MegaBot = () => {
 
     // Access Global State
     const { messages, setMessages, idUser, showQuestion, isTyping, setIsTyping } = useGlobalState();
@@ -125,7 +125,7 @@ const MegaBot3 = () => {
             if (error.code === 'ECONNABORTED') {
                 // manejar tiempo de espera
                 console.log("Error in the request", error.message)
-                const errorMessage = { role: "assistant", content: "¡Disculpas 🙏! Decidí abortar la solicitud porque el servidor donde está mi Base de Conocimiento está con algún problema. No es habitual pero puede suceder. Por favor intentá más tarde. ¡Saludos de MegaBot! 🙂", displayed: false }
+                const errorMessage = { role: "assistant", content: "¡Disculpas 🙏! Decidí abortar la solicitud porque el servidor donde está mi Base de Conocimiento está saturado. No es habitual pero puede suceder. Por favor intentá más tarde. ¡Saludos de MegaBot! 🙂", displayed: false }
                 setIsTyping(false);
                 setMessages((prevMessages) => [...prevMessages, errorMessage]);
             } else {
@@ -210,4 +210,4 @@ const MegaBot3 = () => {
     );
 };
 
-export default MegaBot3;
+export default MegaBot;
