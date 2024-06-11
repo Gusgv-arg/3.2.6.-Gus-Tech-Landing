@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom"
 import { useState } from "react";
+import logo from "../assets/Logo completo.svg"
 import "./NavBar.css"
 import "animate.css"
 
@@ -14,7 +15,7 @@ export const NavBar = (props) => {
                 <div>
                     <Link to="/" >
                         <div className="animate__animated animate__bounceInLeft">
-                           <h1 className="megabot">GusTech<span className="claim"> - Soluciones de IA</span></h1>                          
+                           <h1 className="megabot"><img  className="logo" src={logo} alt="logoGusTech"/><span className="claim"> - Soluciones de IA</span></h1>                          
                         </div>
                     </Link >
                 </div>
