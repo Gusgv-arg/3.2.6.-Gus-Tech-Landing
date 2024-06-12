@@ -109,7 +109,7 @@ const MegaBot = () => {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
-                timeout: 25000
+                timeout: 10000
             });
             // Add displayed propertie so Content renders it and others
             data = response.data
