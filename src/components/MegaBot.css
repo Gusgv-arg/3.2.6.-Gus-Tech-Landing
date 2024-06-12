@@ -150,6 +150,26 @@
 	right: 34.5rem;
 	cursor: pointer	
 }
+.broom{
+	height: 1.5rem;
+	cursor: pointer
+}
+.broomContainer {
+    position: relative;
+}
+.broomContainer:hover::after {
+    content: "Borrar Mensajes";
+    position: absolute;
+    bottom: 2.5rem;
+    right: -0.1rem;
+    background-color: black;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+	font-size: 0.8rem;
+	text-align: center;
+	font-weight: bold;
+}
 
 @keyframes blink {
 	0% {
@@ -187,6 +207,5 @@
 	.user-role {
 		margin: auto;
 		max-width: 310px;
-
 	}
 }

@@ -9,6 +9,7 @@ import attach from "../assets/AkarIconsAttach.svg"
 import { useGlobalState } from "../utils/GlobalStateContext";
 import { question1, question2, question3 } from "../utils/Questions";
 import { handleQuestions } from "../utils/handleQuestions";
+import broom from "../assets/Broom.svg"
 
 const baseURL = process.env.REACT_APP_API_URL_PROD ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_LOCAL;
 console.log("Apuntando a:", baseURL)
@@ -24,6 +25,20 @@ const MegaBot = () => {
     const [numberOfMessages, setNumberOfMessages] = useState(1)
     const [filesSent, setFilesSent] = useState();
     const [filesPreviews, setFilePreviews] = useState()
+
+    // For reseting local storage and messages
+    const resetMessages = () => {
+        // Reset localStorage
+        localStorage.removeItem("messages");
+    
+        // Reset state
+        const initialMessage = {
+            role: "assistant",
+            content: "¡Hola!👋 Soy MegaBot, Asistente virtual impulsado por Inteligencia Artificial entrenado para ayudarte a entender como puedo ayudarte a potenciar tu negocio con esta tecnología. Para comenzar podes seleccionar una pregunta o directamente conversar. ¿Empezamos? 🚀",
+            displayed: true
+        };
+        setMessages([initialMessage]);
+    };
 
     // For answering initial questions
     const handleClickQuestion1 = async () => {
@@ -205,6 +220,9 @@ const MegaBot = () => {
                         <img alt="send" src={send} className="img-button" />
                     </button>
                 </form>
+                <div className="broomContainer">
+                    <img src={broom} alt="broom" className="broom" onClick={resetMessages} />            
+                </div>
             </div>
         </div>
     );
