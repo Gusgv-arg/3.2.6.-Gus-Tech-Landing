@@ -29,6 +29,10 @@
 .meeting {
 	height: 1rem;
 }
+.facebook{
+	height: 1rem;
+
+}
 
 @media (max-width: 700px) {
 	.contactos {

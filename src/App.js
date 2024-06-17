@@ -6,6 +6,7 @@ import { Footer } from "./components/Footer";
 import "./App.css";
 import SobreMi from "./components/SobreMi";
 import { AgendarReunion } from "./components/AgendarReunion";
+import { Proximamente } from "./components/Proximamente";
 
 export default function App() {
 				
@@ -21,6 +22,7 @@ export default function App() {
 						<Route exact path="/" element={<HomeScreen />} />
 						<Route path="/agendar reunión" element={<AgendarReunion />} />
 						<Route path="/sobre mi" element={<SobreMi />} />
+						<Route path="/proximamente" element={<Proximamente />} />
 						<Route path="*" element={<Error404 />} />
 					</Routes>
 				</main>
