@@ -1,7 +1,11 @@
+.footerContainer {
+	display: flex;
+	align-items: center;
+}
 .contactos {
 	display: flex;
 	justify-content: left;
-	margin: 1rem 6rem 0;
+	margin: 1rem 3rem 0 6rem;
 	font-size: 0.8rem;
 	align-items: center;
 	font-weight: bold;
@@ -33,24 +37,41 @@
 	height: 1rem;
 	
 }
+.reunionContainer{
+	display: flex;
+}
 .textReunion {
-	margin-left: 2rem;
-	margin-bottom: 0.3rem;
+	font-size: 0.8rem;
+	font-weight: bold;
+	margin-right: 0.5rem;
+	
 }
 
 @media (max-width: 700px) {
+	.footerContainer{
+		display: block;
+		margin-top:3rem;
+	}
 	.contactos {
 		display: flex;
-		font-size: 0.5rem;
 		/* background-color: beige; */
 		width: 350px;
-		margin: 2rem 0.5rem 0rem 1rem;
-		padding: 20px;
+		margin: 1rem 0.5rem 0rem 3rem;
+		padding: 1px;
+	}
+	.text {
+		font-size: 0.7rem;		
 	}
 	.icon {
 		margin-bottom: 0.5rem;
 	}
 	.contactos a:hover {
 		font-weight: bold;
+	}
+	.reunionContainer{	
+		margin: 1rem 0.5rem 0rem 3rem;		
+	}
+	.textReunion{
+		font-size: 0.7rem;		
 	}
 }
