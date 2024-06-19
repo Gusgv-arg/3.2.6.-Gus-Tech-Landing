@@ -6,6 +6,8 @@ import facebook from "../assets/Facebook.svg"
 import instagram from "../assets/Instagram.svg"
 import discord from "../assets/Discord.svg"
 import linkedin from "../assets/Linkedin.svg"
+//import calendar from "../assets/ColorCalendar.svg"
+import calendar from "../assets/FlatTearOffCalendar.svg"
 import { Link } from "react-router-dom"
 
 export const Footer = () => {
@@ -23,12 +25,7 @@ export const Footer = () => {
                     <a href="https://wa.me/5491161405589" target="_blank" rel="noreferrer">
                         <img src={whatsapp} alt="whatsapp" className="whatsapp" />
                     </a>
-                </div>
-                <div>
-                    <a href="https://calendly.com/gusgvillafane/inteligencia-artificial" target="_blank" rel="noreferrer" title="Reunión en Google Meet">
-                        <img src={meeting} alt="meeting" className="meeting" />                    
-                    </a>
-                </div>
+                </div>                
                 <div>
                     <a href="https://www.facebook.com/profile.php?id=61560659369776" target="_blank" rel="noreferrer" >
                         <img src={facebook} alt="facebook" className="facebook" />                    
@@ -47,6 +44,12 @@ export const Footer = () => {
                 <div>
                     <a href="http://linkedin.com/in/gustavo-gomez-villafañe-6164526" target="_blank" rel="noreferrer" >
                         <img src={linkedin} alt="linkedin" className="linkedin" />                    
+                    </a>
+                </div>
+                <span className="textReunion">Agendar Reunión:</span>
+                <div>
+                    <a href="https://calendly.com/gusgvillafane/inteligencia-artificial" target="_blank" rel="noreferrer" title="Agendar Reunión en Google Meet">
+                        <img src={calendar} alt="meeting" className="meeting" />                    
                     </a>
                 </div>
             </div>
