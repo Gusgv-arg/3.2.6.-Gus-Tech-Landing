@@ -140,10 +140,29 @@
 	background-color: black;
 	color: white;
 	padding: 5px;
-	border-radius: 5px;	
+	border-radius: 5px;
+	font-size: 0.6rem;	
 }
 .img-button {
 	width: 100%;
+}
+.attachContainer {
+	display: flex;
+	align-items: center;
+	position: relative;	
+}
+.attachContainer:hover::after {
+    content: "Adjuntar Imagen";
+    position: absolute;
+    bottom: 2.5rem;
+    right: 33rem;
+    background-color: black;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+	font-size: 0.6rem;
+	text-align: center;
+	font-weight: bold;
 }
 .attachButton {
 	position: relative;
@@ -166,7 +185,7 @@
     color: white;
     padding: 5px;
     border-radius: 5px;
-	font-size: 0.8rem;
+	font-size: 0.6rem;
 	text-align: center;
 	font-weight: bold;
 }

@@ -30,7 +30,7 @@ const MegaBot = () => {
     const resetMessages = () => {
         // Reset localStorage
         localStorage.removeItem("messages");
-    
+
         // Reset state
         const initialMessage = {
             role: "assistant",
@@ -210,18 +210,20 @@ const MegaBot = () => {
                         ref={fileInputRef} // Referencia para activar el clic
                         onChange={handleFileChange}
                     />
-                    <img
-                        src={attach}
-                        alt="Attach file"
-                        onClick={() => fileInputRef.current.click()} // Simula un clic en el input de tipo file
-                        className="attachButton"
-                    />
+                    <div className="attachContainer">
+                        <img
+                            src={attach}
+                            alt="Attach file"
+                            onClick={() => fileInputRef.current.click()} // Simula un clic en el input de tipo file
+                            className="attachButton"
+                        />
+                    </div>
                     <button type="submit" className={input ? "submitButton" : "submitButtonWithNoInput"} disabled={!input}>
                         <img alt="send" src={send} className="img-button" />
                     </button>
                 </form>
                 <div className="broomContainer">
-                    <img src={broom} alt="broom" className="broom" onClick={resetMessages} />            
+                    <img src={broom} alt="broom" className="broom" onClick={resetMessages} />
                 </div>
             </div>
         </div>
