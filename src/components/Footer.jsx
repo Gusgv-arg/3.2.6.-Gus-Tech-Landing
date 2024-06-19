@@ -4,6 +4,8 @@ import whatsapp from "../assets/WhatsappIcon.svg"
 import meeting from "../assets/GoogleMeet.svg"
 import facebook from "../assets/Facebook.svg"
 import instagram from "../assets/Instagram.svg"
+import discord from "../assets/Discord.svg"
+import linkedin from "../assets/Linkedin.svg"
 import { Link } from "react-router-dom"
 
 export const Footer = () => {
@@ -36,6 +38,16 @@ export const Footer = () => {
                     <Link to="/proximamente" >
                         <img src={instagram} alt="instagram" className="instagram" />                    
                     </Link>
+                </div>
+                <div>
+                    <a href="https://discord.com/accessibility/#0958" target="_blank" rel="noreferrer" >
+                        <img src={discord} alt="discord" className="discord" />                    
+                    </a>
+                </div>
+                <div>
+                    <a href="http://linkedin.com/in/gustavo-gomez-villafañe-6164526" target="_blank" rel="noreferrer" >
+                        <img src={linkedin} alt="linkedin" className="linkedin" />                    
+                    </a>
                 </div>
             </div>
         </>
