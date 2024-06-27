@@ -1,5 +1,5 @@
 export const question1 =
-	"1. ¿Porqué debería implementar un Chatbot de de IA?";
+	"1. ¿Porqué debería implementar un Chatbot de IA?";
 
 export const question2 =
 	"2. ¿Cómo sabe el Chatbot de IA sobre de mi negocio?";
