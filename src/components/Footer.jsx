@@ -20,7 +20,7 @@ export const Footer = () => {
                     </a>
                 </div>
                 <div>
-                    <a href="https://wa.me/5491161405589" target="_blank" rel="noreferrer">
+                    <a href="https://wa.me/541123429504" target="_blank" rel="noreferrer">
                         <img src={whatsapp} alt="whatsapp" className="whatsapp" />
                     </a>
                 </div>
