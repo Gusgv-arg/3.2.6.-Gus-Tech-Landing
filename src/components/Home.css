@@ -5,7 +5,7 @@
 	justify-content: center;
 	align-items: center;
     margin: 0rem 6rem; 
-	height: 78vh 	
+	height: 78vh 	/* Poner en 78 para que no se mueva */
 }
 .image{	
 	aspect-ratio: 1/1;

@@ -2,8 +2,10 @@ import React from 'react'
 import personaje from "../assets/Personaje.svg";
 //import personaje from "../assets/PersonajeAnterior.jpeg";
 import "animate.css"
-import MegaBot from './MegaBot';
+//import MegaBot from './MegaBot';
 import "./Home.css"
+import MegaBot3 from './MegaBot3';
+
 
 export const HomeScreen = () => {
 	return (
@@ -17,7 +19,9 @@ export const HomeScreen = () => {
 				/>
 			</div>
 			<div>				
-				<MegaBot/>				
+				{/* <MegaBot/> */}				
+						
+				 <MegaBot3/>  				
 			</div>
 		</div>
 	)

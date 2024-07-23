@@ -5,7 +5,7 @@
 	height: 75vh;
 	display: flex;
 	flex-direction: column;
-	margin:1rem 
+	margin: 1rem;
 }
 .scroll {
 	/* border: solid; */
@@ -13,7 +13,7 @@
 	overflow-y: auto;
 	scrollbar-width: none;
 	height: 90%;
-	max-height: 90%;	
+	max-height: 90%;
 }
 /* Oculta los scrollbars en Webkit (Chrome, Safari, etc.) */
 .scroll::-webkit-scrollbar {
@@ -53,7 +53,7 @@
 	justify-content: center;
 	align-content: center;
 	gap: 1rem;
-	margin-top:1.2rem	
+	margin-top: 1.2rem;
 }
 .hidden-question {
 	visibility: hidden;
@@ -73,41 +73,51 @@
 	color: white;
 }
 .inputContainer {
-	height: 10%;
+	/* height: 10%;
 	max-height: 10%;
-	/* background-color: chartreuse; */
 	display: flex;
 	align-items: center;
 	justify-content: right;
-	width: 100%;	
+	width: 100%; */
+
+	height: auto;
+	min-height: 10%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 10px 0;
 }
 .formulario {
 	display: flex;
 	/* background-color: beige; */
-	width: 38rem;
+	width: 40rem; /* 38 rem */
 	min-width: 21rem;
 	margin: auto;
-	border: solid;	
+	border: solid;
 	border-radius: 10px;
 	border-width: 0.5px;
+	position: relative;
+	align-items: center;
 }
 .formulario:focus-within {
-	border-width: 2px;	
+	border-width: 2px;
 }
 .inputText {
 	height: 1.4rem;
-	padding: 1rem 2.5rem;
+	padding: 1.2rem 0.5rem;
 	border-radius: 10px;
 	width: 100%;
-	border: none
+	border: none;
+	background-color: transparent;
 }
-.inputText:focus{
+.inputText:focus {
 	outline: none;
 }
 .img-preview {
 	height: 25px;
 	width: 25px;
-	margin: auto
+	margin: auto;
 }
 .img-view {
 	height: 3rem;
@@ -122,13 +132,12 @@
 	position: relative;
 	right: 0.5rem;
 	padding-top: 0.2rem;
-	
 }
 .submitButtonWithNoInput {
 	border: none;
 	background-color: transparent;
 	opacity: 30%;
-	position: relative;
+	position: absolute;
 	right: 0.5rem;
 	padding-top: 0.2rem;
 }
@@ -141,50 +150,142 @@
 	color: white;
 	padding: 5px;
 	border-radius: 5px;
-	font-size: 0.6rem;	
+	font-size: 0.6rem;
 }
 .img-button {
 	width: 100%;
+	width: 1.7rem;
+	margin-left: 2rem;
 }
 .attachContainer {
 	display: flex;
 	align-items: center;
-	position: relative;	
 }
 .attachContainer:hover::after {
-    content: "Adjuntar Imagen";
-    position: absolute;
-    bottom: 2.5rem;
-    right: 33rem;
-    background-color: black;
-    color: white;
-    padding: 5px;
-    border-radius: 5px;
+	content: "Adjuntar Imagen";
+	position: absolute;
+	bottom: 2.7rem;
+	right: 34rem;
+	background-color: black;
+	color: white;
+	padding: 5px;
+	border-radius: 5px;
 	font-size: 0.6rem;
 	text-align: center;
 	font-weight: bold;
 }
 .attachButton {
-	position: relative;
-	right: 34.5rem;
-	cursor: pointer	
+	cursor: pointer;
+	margin-left: 0.5rem;
 }
-.broom{
+.broom {
 	height: 1.5rem;
-	cursor: pointer
+	cursor: pointer;
 }
 .broomContainer {
-    position: relative;
+	position: relative;
 }
 .broomContainer:hover::after {
-    content: "Borrar Mensajes";
-    position: absolute;
-    bottom: 2.5rem;
-    right: -0.1rem;
-    background-color: black;
-    color: white;
-    padding: 5px;
-    border-radius: 5px;
+	content: "Borrar Historial";
+	position: absolute;
+	bottom: 2.6rem;
+	right: -0.1rem;
+	background-color: black;
+	color: white;
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 0.6rem;
+	text-align: center;
+	font-weight: bold;
+}
+
+.audio-recorder-container {
+	display: flex;
+	align-items: center;
+}
+
+/* Estilos para los controles de grabación */
+.audio-recorder-container > div {
+	display: flex;
+	align-items: center;
+}
+
+.audio-recorder-container button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0px 2px;
+	background-color: transparent;
+	
+}
+.audio-recorder-container img {
+	width: 25px;	
+}
+.audio-recorder-container audio {
+	height: 2rem;
+	margin: 0
+}
+.trashContainer:hover::after{
+	content: "Borrar Audio";
+	position: absolute;
+	bottom: 2.6rem;
+	right: 19.5rem;
+	background-color: black;
+	color: white;
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 0.6rem;
+	text-align: center;
+	font-weight: bold;
+}
+.pauseContainer:hover::after{
+	content: "Pausar Audio";
+	position: absolute;
+	bottom: 2.6rem;
+	right: 2.5rem;
+	background-color: black;
+	color: white;
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 0.6rem;
+	text-align: center;
+	font-weight: bold;
+}
+.recordContainer:hover::after{
+	content: "Parar Audio";
+	position: absolute;
+	bottom: 2.6rem;
+	right: 0.3rem;
+	background-color: black;
+	color: white;
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 0.6rem;
+	text-align: center;
+	font-weight: bold;
+}
+.sendContainer:hover::after{
+	content: "Enviar Audio";
+	position: absolute;
+	bottom: 2.6rem;
+	right: -1.3rem;
+	background-color: black;
+	color: white;
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 0.6rem;
+	text-align: center;
+	font-weight: bold;
+}
+.resumeContainer:hover::after{
+	content: "Reanudar Audio";
+	position: absolute;
+	bottom: 2.6rem;
+	right: 0rem;
+	background-color: black;
+	color: white;
+	padding: 5px;
+	border-radius: 5px;
 	font-size: 0.6rem;
 	text-align: center;
 	font-weight: bold;
@@ -205,8 +306,9 @@
 	animation: blink 1s infinite;
 	color: black;
 	font-weight: bolder;
-} 
-@media (width<700px){
+}
+
+@media (width<700px) {
 	.chat-container {
 		width: 320px;
 		height: 580px;
@@ -214,11 +316,11 @@
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
-		margin-top: 40px; 		
-	}	
+		margin-top: 40px;
+	}
 	.formulario {
-		min-width: 10rem;		
-	}	
+		min-width: 10rem;
+	}
 	.assistant-role {
 		margin: 0;
 	}
@@ -229,12 +331,12 @@
 	.attachButton {
 		position: relative;
 		right: 15.5rem;
-		cursor: pointer	
+		cursor: pointer;
 	}
 	.attachContainer:hover::after {
 		content: "Adjuntar Imagen";
 		position: absolute;
 		bottom: 2.5rem;
-		right: 14rem;	
+		right: 14rem;
 	}
 }
