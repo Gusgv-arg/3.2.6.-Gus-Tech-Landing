@@ -1,15 +1,20 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { Content } from "./Content";
-import send from "../assets/arrow-up-circle-solid.svg"
 import "./MegaBot.css"
 import axios from "axios"
-import chatbot from "../assets/Chatbot con headphones fondo blanco.jpeg";
-import attach from "../assets/AkarIconsAttach.svg"
 import { useGlobalState } from "../utils/GlobalStateContext";
 import { question1, question2, question3 } from "../utils/Questions";
 import { handleQuestions } from "../utils/handleQuestions";
+import { useReactMediaRecorder } from "react-media-recorder-2";
+import chatbot from "../assets/Chatbot con headphones fondo blanco.jpeg";
+import attach from "../assets/AkarIconsAttach.svg"
 import broom from "../assets/Broom.svg"
+import trash from "../assets/TrashGrey.svg"
+import microphone from "../assets/Microphone.svg"
+import record from "../assets/RecordGreen.svg"
+import send from "../assets/SendGreen.svg"
+import pause from "../assets/PauseRed.svg"
 
 const baseURL = process.env.REACT_APP_API_URL_PROD ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_LOCAL;
 console.log("Apuntando a:", baseURL)
@@ -25,6 +30,20 @@ const MegaBot = () => {
     const [numberOfMessages, setNumberOfMessages] = useState(1)
     const [filesSent, setFilesSent] = useState();
     const [filesPreviews, setFilePreviews] = useState()
+    
+    const fileInputRef = useRef(null);
+
+    // ------- Audio functions --------//      
+    const { status, startRecording, stopRecording, mediaBlobUrl, clearBlobUrl, pauseRecording, resumeRecording } =
+        useReactMediaRecorder({ audio: true });
+    //console.log("mediaBlobUrl", mediaBlobUrl)
+    //console.log("Status--->", status)
+
+    const urlToBlob = async (url) => {
+        const response = await fetch(url);
+        const blob = await response.blob();
+        return blob;
+    }
 
     // For reseting local storage and messages
     const resetMessages = () => {
@@ -65,9 +84,7 @@ const MegaBot = () => {
         setIsTyping(false)
     };
 
-    //For attachment
-    const fileInputRef = useRef(null);
-
+    //For file attachments
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         setFilesSent(file) //hace falta?????         
@@ -84,78 +101,82 @@ const MegaBot = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
+    // ----- Sending request to the API ----- //    
     const getMessages = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
+        if (!input.trim() && !mediaBlobUrl) return;
 
-        //If there is a blanck return
-        if (!input.trim()) return;
-
-        //Object of the user message
         const newMessage = {
-            role: "user", content: input, id_user: idUser, name: "Web User",
-            channel: "web", type: "text", image: filesPreviews
-        }
+            role: "user",
+            content: input,
+            id_user: idUser,
+            name: "Web User",
+            channel: "web",
+            type: mediaBlobUrl ? "audio" : "text",
+            image: filesPreviews,
+            audio: mediaBlobUrl
+        };
         setMessages([...messages, newMessage]);
 
-        //FormData
         const formData = new FormData();
         formData.append('messages', JSON.stringify(newMessage));
 
         if (filesSent) {
-            // Append file to formData & clean container in input
             formData.append('files', filesSent);
         }
 
-        // For console.log formData
-        for (let [key, value] of formData.entries()) {
-            console.log(`${key}: ${value}`);
+        if (mediaBlobUrl) {
+            const audioBlob = await urlToBlob(mediaBlobUrl);
+            formData.append('audio', audioBlob, 'audio.webm');
+            clearBlobUrl()
         }
 
         try {
-            let data;
-
-            //Change typing state for visual effect && clean input
             setIsTyping(true);
-            setInput("")
-            setFilePreviews()
+            setInput("");
+            setFilePreviews();
 
-            // Post to the API
             const response = await axios.post(`${baseURL}/megabot`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-                timeout: 10000
+                headers: { 'Content-Type': 'multipart/form-data' },
+                timeout: 13000
             });
-            // Add displayed propertie so Content renders it and others
-            data = response.data
-            data.displayed = false
 
-            //Change states
+            const data = response.data;
+            data.displayed = false;
+            console.log("Api response", data)
+
             setMessages((prevMessages) => [...prevMessages, data]);
             setIsTyping(false);
             setNumberOfMessages(numberOfMessages + 1);
             setFilesSent();
-
         } catch (error) {
-            if (error.code === 'ECONNABORTED') {
-                // manejar tiempo de espera
-                console.log("Error in the request", error.message)
-                const errorMessage = { role: "assistant", content: "¡Disculpas 🙏! Decidí abortar la solicitud porque el servidor donde está mi Base de Conocimiento está saturado. No es habitual pero puede suceder. Por favor intentá más tarde. ¡Saludos de MegaBot! 🙂", displayed: false }
-                setIsTyping(false);
-                setMessages((prevMessages) => [...prevMessages, errorMessage]);
+            console.error("Error in request:", error);
+            let errorMessage
+            if (newMessage.type === "audio") {
+                errorMessage = {
+                    role: "assistant",
+                    content: "Lo siento, estoy trabajando para dentro de poco tiempo poder procesar tus audios.",
+                    displayed: false
+                };
             } else {
-                console.log(error);
-                const errorMessage = { role: "assistant", content: "¡Disculpas 🙏! Hubo un error interno y no pude contestar a tu pregunta. Por favor intentá más tarde! ¡Saludos de MegaBot! 🙂", displayed: false }
-                setIsTyping(false);
-                setMessages((prevMessages) => [...prevMessages, errorMessage]);
+                errorMessage = {
+                    role: "assistant",
+                    content: "Lo siento, hubo un error al procesar tu mensaje. Por favor, intenta nuevamente.",
+                    displayed: false
+                };
             }
+            setIsTyping(false);
+            setMessages((prevMessages) => [...prevMessages, errorMessage]);
         }
     };
 
     useEffect(() => {
         localStorage.setItem("messages", JSON.stringify(messages));
         scrollToBottom()
-    }, [messages]);
+        if (status==="idle"){
+            stopRecording()
+        }        
+    }, [messages, status]);
 
     return (
         <div className="chat-container">
@@ -163,9 +184,9 @@ const MegaBot = () => {
             <div className="scroll">
 
                 {messages[messages.length - 1].displayed === true ? messages.map((chatMessage, index) => (
-                    <div>
+                    <div key={index}>
                         <div className={chatMessage.role === "assistant" ? "assistant-role" : "user-role"}
-                            key={index}>
+                        >
                             {chatMessage.role === "user" ? "" : <img
                                 src={chatbot}
                                 alt="chatbot"
@@ -173,6 +194,7 @@ const MegaBot = () => {
                             />}
                             <span>{chatMessage.content}</span><br />
                             {chatMessage.image && <img src={chatMessage.image} className="img-view" alt="img" />}
+                            {chatMessage.type === "audio" && <audio src={chatMessage.audio} controls />}
                         </div>
 
                         {index === 0 && (<>
@@ -195,21 +217,6 @@ const MegaBot = () => {
 
             <div className="inputContainer">
                 <form className="formulario" onSubmit={getMessages}>
-                    <input
-                        className={`${isTyping ? 'typing inputText' : 'inputText'}`}
-                        value={isTyping ? "Buscando en mi base de conocimiento..." : input}
-                        onChange={(e) => setInput(e.target.value)}
-                        placeholder="Preguntale a MegaBot..."
-
-                    />
-                    {filesPreviews && <img src={filesPreviews} className="img-preview" alt="img" />}
-
-                    <input
-                        type="file"
-                        style={{ display: 'none' }}
-                        ref={fileInputRef} // Referencia para activar el clic
-                        onChange={handleFileChange}
-                    />
                     <div className="attachContainer">
                         <img
                             src={attach}
@@ -218,9 +225,77 @@ const MegaBot = () => {
                             className="attachButton"
                         />
                     </div>
-                    <button type="submit" className={input ? "submitButton" : "submitButtonWithNoInput"} disabled={!input}>
-                        <img alt="send" src={send} className="img-button" />
+                    <input
+                        name="file"
+                        type="file"
+                        style={{ display: 'none' }}
+                        ref={fileInputRef} // Referencia para activar el clic
+                        onChange={handleFileChange}
+                    />
+                    <input
+                        name="message"
+                        className={`${isTyping ? 'typing inputText' : 'inputText'}`}
+                        value={isTyping ? "Buscando en mi base de conocimiento..." : input}
+                        onChange={(e) => setInput(e.target.value)}
+                        placeholder="Preguntale a MegaBot..."
+
+                    />
+                    {filesPreviews && <img src={filesPreviews} className="img-preview" alt="img" />}
+
+                    <button type="submit" className={input || mediaBlobUrl ? "submitButton" : "submitButtonWithNoInput"} disabled={!input && !mediaBlobUrl}>
+                        {/* <img alt="send" src={send} className="img-button" /> */}
                     </button>
+
+                    <div className="audio-recorder-container">
+                        {status === "recording" ?
+                            <div>                                
+                                <audio src={mediaBlobUrl} controls />
+                                <div className="pauseContainer">
+                                    <button>
+                                        <img src={pause} alt="pause" onClick={pauseRecording} />
+                                    </button>
+                                </div>
+                                <div className="recordContainer">
+                                    <button>
+                                        <img src={record} alt="record" onClick={stopRecording} />
+                                    </button>
+                                </div>
+                            </div>
+                            : status === "paused" ?
+                                <div>                                    
+                                    <audio src={mediaBlobUrl} controls />
+                                    <div className="resumeContainer">
+                                        <button>
+                                            <img src={microphone} alt="micro" onClick={resumeRecording} />
+                                        </button>
+                                    </div>
+                                    <div className="recordContainer">
+                                        <button>
+                                            <img src={record} alt="record" onClick={stopRecording} />
+                                        </button>
+                                    </div>
+                                </div>
+                            : status === "stopped"?
+                                <div >
+                                    <div className="trashContainer">
+                                        <button>
+                                            <img src={trash} alt="trash" onClick={clearBlobUrl} />
+                                        </button>
+                                    </div>
+                                    <audio src={mediaBlobUrl} controls />
+                                    <div className="sendContainer">
+                                        <button>
+                                            <img src={send} alt="send" onClick={getMessages} />
+                                        </button>
+                                    </div>
+                                </div>
+                            : <div className="sendContainer">
+                                <button>
+                                    <img src={microphone} alt="micro" onClick={startRecording} />
+                                </button>
+                              </div>
+                        }
+                    </div>
                 </form>
                 <div className="broomContainer">
                     <img src={broom} alt="broom" className="broom" onClick={resetMessages} />
