@@ -135,7 +135,8 @@ const MegaBot = () => {
             setIsTyping(true);
             setInput("");
             setFilePreviews();
-
+            setFilesSent();
+            
             const response = await axios.post(`${baseURL}/megabot`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
                 timeout: 13000
