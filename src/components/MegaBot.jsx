@@ -30,7 +30,7 @@ const MegaBot = () => {
     const [numberOfMessages, setNumberOfMessages] = useState(1)
     const [filesSent, setFilesSent] = useState();
     const [filesPreviews, setFilePreviews] = useState()
-    
+
     const fileInputRef = useRef(null);
 
     // ------- Audio functions --------//      
@@ -136,15 +136,21 @@ const MegaBot = () => {
             setInput("");
             setFilePreviews();
             setFilesSent();
-            
+
             const response = await axios.post(`${baseURL}/megabot`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
                 timeout: 13000
             });
 
-            const data = response.data;
-            data.displayed = false;
-            console.log("Api response", data)
+            // If the response is audio, create an object URL for it
+            let data;
+            if (response.headers['content-type'].startsWith('audio/')) {
+                const audioUrl = URL.createObjectURL(response.data);
+                data = { role: "assistant", type: "audio", audio: audioUrl, displayed: false };
+            } else {
+                data = response.data;
+                data.displayed = false;
+            }
 
             setMessages((prevMessages) => [...prevMessages, data]);
             setIsTyping(false);
@@ -174,9 +180,9 @@ const MegaBot = () => {
     useEffect(() => {
         localStorage.setItem("messages", JSON.stringify(messages));
         scrollToBottom()
-        if (status==="idle"){
+        if (status === "idle") {
             stopRecording()
-        }        
+        }
     }, [messages, status]);
 
     return (
@@ -249,7 +255,7 @@ const MegaBot = () => {
 
                     <div className="audio-recorder-container">
                         {status === "recording" ?
-                            <div>                                
+                            <div>
                                 <audio src={mediaBlobUrl} controls />
                                 <div className="pauseContainer">
                                     <button>
@@ -263,7 +269,7 @@ const MegaBot = () => {
                                 </div>
                             </div>
                             : status === "paused" ?
-                                <div>                                    
+                                <div>
                                     <audio src={mediaBlobUrl} controls />
                                     <div className="resumeContainer">
                                         <button>
@@ -276,25 +282,25 @@ const MegaBot = () => {
                                         </button>
                                     </div>
                                 </div>
-                            : status === "stopped"?
-                                <div >
-                                    <div className="trashContainer">
+                                : status === "stopped" ?
+                                    <div >
+                                        <div className="trashContainer">
+                                            <button>
+                                                <img src={trash} alt="trash" onClick={clearBlobUrl} />
+                                            </button>
+                                        </div>
+                                        <audio src={mediaBlobUrl} controls />
+                                        <div className="sendContainer">
+                                            <button>
+                                                <img src={send} alt="send" onClick={getMessages} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    : <div className="sendContainer">
                                         <button>
-                                            <img src={trash} alt="trash" onClick={clearBlobUrl} />
+                                            <img src={microphone} alt="micro" onClick={startRecording} />
                                         </button>
                                     </div>
-                                    <audio src={mediaBlobUrl} controls />
-                                    <div className="sendContainer">
-                                        <button>
-                                            <img src={send} alt="send" onClick={getMessages} />
-                                        </button>
-                                    </div>
-                                </div>
-                            : <div className="sendContainer">
-                                <button>
-                                    <img src={microphone} alt="micro" onClick={startRecording} />
-                                </button>
-                              </div>
                         }
                     </div>
                 </form>
