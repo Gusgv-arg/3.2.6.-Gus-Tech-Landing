@@ -158,6 +158,7 @@ const MegaBot = () => {
             setFilesSent();
         } catch (error) {
             console.error("Error in request:", error);
+
             let errorMessage
             if (newMessage.type === "audio") {
                 errorMessage = {
@@ -165,10 +166,16 @@ const MegaBot = () => {
                     content: "Lo siento, estoy trabajando para dentro de poco tiempo poder procesar tus audios.",
                     displayed: false
                 };
+            } else if (error.code === "ECONNABORTED") {
+                errorMessage = {
+                    role: "assistant",
+                    content: "¡Disculpas! Interrumpí el proceso porque el servidor está muy lento. Por favor volvé a intentar.",
+                    displayed: false
+                };
             } else {
                 errorMessage = {
                     role: "assistant",
-                    content: "Lo siento, hubo un error al procesar tu mensaje. Por favor, intenta nuevamente.",
+                    content: "Lo siento, hubo un error al procesar tu mensaje. Por favor intenta nuevamente.",
                     displayed: false
                 };
             }
