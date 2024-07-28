@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Content } from "./Content";
 import "./MegaBot.css"
 import axios from "axios"
@@ -30,6 +30,7 @@ const MegaBot = () => {
     const [numberOfMessages, setNumberOfMessages] = useState(1)
     const [filesSent, setFilesSent] = useState();
     const [filesPreviews, setFilePreviews] = useState()
+    const [audioUrls, setAudioUrls] = useState({});
 
     const fileInputRef = useRef(null);
 
@@ -38,6 +39,11 @@ const MegaBot = () => {
         useReactMediaRecorder({ audio: true });
     //console.log("mediaBlobUrl", mediaBlobUrl)
     //console.log("Status--->", status)
+
+    // Function to add a new audio URL
+    const addAudioUrl = useCallback((messageId, url) => {
+        setAudioUrls(prev => ({ ...prev, [messageId]: url }));
+    }, []);
 
     const urlToBlob = async (url) => {
         const response = await fetch(url);
@@ -57,6 +63,9 @@ const MegaBot = () => {
             displayed: true
         };
         setMessages([initialMessage]);
+        setFilePreviews(null)
+        setFilesSent(null)
+        setNumberOfMessages(1)
     };
 
     // For answering initial questions
@@ -139,17 +148,23 @@ const MegaBot = () => {
 
             const response = await axios.post(`${baseURL}/megabot`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
-                timeout: 13000
+                timeout: 23000
             });
 
             // If the response is audio, create an object URL for it
             let data;
-            if (response.headers['content-type'].startsWith('audio/')) {
-                const audioUrl = URL.createObjectURL(response.data);
-                data = { role: "assistant", type: "audio", audio: audioUrl, displayed: false };
+            let messageId;
+            console.log("Api response--->", response)
+            if (response.headers["content-type"].includes('application/octet-stream')) {
+                const blob = new Blob([response.data], { type: 'audio/mpeg' });
+                const audioUrl = URL.createObjectURL(blob);
+                messageId = Date.now().toString(); // Generate a unique ID for the message
+                addAudioUrl(messageId, audioUrl);
+                data = { id: messageId, role: "assistant", type: "audio", audio: audioUrl, displayed: false };
             } else {
-                data = response.data;
-                data.displayed = false;
+                messageId = Date.now().toString(); // Generate a unique ID for the message
+                data = { id: messageId, role: "assistant", type: "text", content: response.data, displayed: false };
+
             }
 
             setMessages((prevMessages) => [...prevMessages, data]);
@@ -185,12 +200,18 @@ const MegaBot = () => {
     };
 
     useEffect(() => {
+
         localStorage.setItem("messages", JSON.stringify(messages));
-        scrollToBottom()
         if (status === "idle") {
             stopRecording()
         }
-    }, [messages, status]);
+
+        scrollToBottom()
+
+        return () => {
+            Object.values(audioUrls).forEach(url => URL.revokeObjectURL(url));
+        };
+    }, [messages, status, audioUrls]);
 
     return (
         <div className="chat-container">
@@ -198,7 +219,7 @@ const MegaBot = () => {
             <div className="scroll">
 
                 {messages[messages.length - 1].displayed === true ? messages.map((chatMessage, index) => (
-                    <div key={index}>
+                    <div key={chatMessage.id || index}>
                         <div className={chatMessage.role === "assistant" ? "assistant-role" : "user-role"}
                         >
                             {chatMessage.role === "user" ? "" : <img
@@ -208,7 +229,7 @@ const MegaBot = () => {
                             />}
                             <span>{chatMessage.content}</span><br />
                             {chatMessage.image && <img src={chatMessage.image} className="img-view" alt="img" />}
-                            {chatMessage.type === "audio" && <audio src={chatMessage.audio} controls />}
+                            {chatMessage.type === "audio" && <audio src={chatMessage.audio} controls />}                            
                         </div>
 
                         {index === 0 && (<>

@@ -55,7 +55,15 @@ export const Content = (props) => {
       if (lastAssistantMessageIndex !== undefined) {
         lastAssistantMessage = props.messages[lastAssistantMessageIndex];
 
-        if (lastAssistantMessage.displayed === false) {
+        if (lastAssistantMessage.type === "audio") {
+          setPrintedContent((prevContent) => {
+            const newContent = [...prevContent];
+            newContent[lastAssistantMessageIndex] = lastAssistantMessage.content;
+            return newContent;
+          });
+          setShowQuestion("visible-question")
+          localStorage.setItem("showQuestion", JSON.stringify("visible-question"));
+        } else if (lastAssistantMessage.displayed === false) {
 
           const content = lastAssistantMessage.content.split("");
           let currentIndex = 0;
@@ -97,7 +105,7 @@ export const Content = (props) => {
             />}
             <span>{chatMessage.role === "assistant" && index === props.messages.length - 1 ? printedContent[index] : chatMessage.content}</span>
             {chatMessage.image ? <img src={chatMessage.image} className="img-view" alt="chat-img" /> : null}
-            {chatMessage.type === "audio" && <audio src={chatMessage.audio} controls />}
+            {chatMessage.type === "audio" && <audio src={chatMessage.audio} controls />}            
           </div>
 
           {index === 0 && (<>
