@@ -148,7 +148,7 @@ const MegaBot = () => {
 
             const response = await axios.post(`${baseURL}/megabot`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
-                timeout: 23000
+                timeout: 30000
             });
 
             // If the response is audio, create an object URL for it
@@ -164,144 +164,137 @@ const MegaBot = () => {
             } else {
                 messageId = Date.now().toString(); // Generate a unique ID for the message
                 data = { id: messageId, role: "assistant", type: "text", content: response?.data?.content ? response.data.content : response.data, displayed: false };
-
             }
 
+            // Update States
             setMessages((prevMessages) => [...prevMessages, data]);
             setIsTyping(false);
             setNumberOfMessages(numberOfMessages + 1);
             setFilesSent();
-        } catch (error) {
-            console.error("Error in request:", error);
 
-            let errorMessage
-            if (newMessage.type === "audio") {
-                errorMessage = {
-                    role: "assistant",
-                    content: "Lo siento, estoy trabajando para dentro de poco tiempo poder procesar tus audios.",
-                    displayed: false
-                };
-            } else if (error.code === "ECONNABORTED") {
-                errorMessage = {
-                    role: "assistant",
-                    content: "¡Disculpas! Interrumpí el proceso porque el servidor está muy lento. Por favor volvé a intentar.",
-                    displayed: false
-                };
-            } else {
-                errorMessage = {
-                    role: "assistant",
-                    content: "Lo siento, hubo un error al procesar tu mensaje. Por favor intenta nuevamente.",
-                    displayed: false
-                };
+            // Check if its an error produced by OpenAi Server && reset threadId in the server
+            if (data.content.includes("Hay un problema en el servidor")) {
+                const resetThread = await axios.post(`${baseURL}/megabot/clean_thread`, {idUser: idUser})
+                console.log("Resultado del reseteo del thread:", resetThread.data)
             }
-            setIsTyping(false);
-            setMessages((prevMessages) => [...prevMessages, errorMessage]);
-        }
-    };
 
-    useEffect(() => {
+            } catch (error) {
+                console.error("Error in request:", error);
 
-        localStorage.setItem("messages", JSON.stringify(messages));
-        if (status === "idle") {
-            stopRecording()
-        }
-
-        scrollToBottom()
-
-        return () => {
-            Object.values(audioUrls).forEach(url => URL.revokeObjectURL(url));
+                let errorMessage
+                if (newMessage.type === "audio") {
+                    errorMessage = {
+                        role: "assistant",
+                        content: "Lo siento, estoy trabajando para dentro de poco tiempo poder procesar tus audios.",
+                        displayed: false
+                    };
+                } else if (error.code === "ECONNABORTED") {
+                    errorMessage = {
+                        role: "assistant",
+                        content: "¡Disculpas! Interrumpí el proceso porque el servidor está muy lento. Por favor volvé a intentar.",
+                        displayed: false
+                    };
+                } else {
+                    errorMessage = {
+                        role: "assistant",
+                        content: "Lo siento, hubo un error al procesar tu mensaje. Por favor intenta nuevamente.",
+                        displayed: false
+                    };
+                }
+                setIsTyping(false);
+                setMessages((prevMessages) => [...prevMessages, errorMessage]);
+            }
         };
-    }, [messages, status, audioUrls]);
 
-    return (
-        <div className="chat-container">
+        useEffect(() => {
 
-            <div className="scroll">
+            localStorage.setItem("messages", JSON.stringify(messages));
+            if (status === "idle") {
+                stopRecording()
+            }
 
-                {messages[messages.length - 1].displayed === true ? messages.map((chatMessage, index) => (
-                    <div key={chatMessage.id || index}>
-                        <div className={chatMessage.role === "assistant" ? "assistant-role" : "user-role"}
-                        >
-                            {chatMessage.role === "user" ? "" : <img
-                                src={chatbot}
-                                alt="chatbot"
-                                className="chatbot-image"
-                            />}
-                            <span>{chatMessage.content}</span><br />
-                            {chatMessage.image && <img src={chatMessage.image} className="img-view" alt="img" />}
-                            {chatMessage.type === "audio" && <audio src={chatMessage.audio} controls />}                            
+            scrollToBottom()
+
+            /* return () => {
+                Object.values(audioUrls).forEach(url => URL.revokeObjectURL(url));
+            }; */
+        }, [messages, status]);
+
+        return (
+            <div className="chat-container">
+
+                <div className="scroll">
+
+                    {messages[messages.length - 1].displayed === true ? messages.map((chatMessage, index) => (
+                        <div key={chatMessage.id || index}>
+                            <div className={chatMessage.role === "assistant" ? "assistant-role" : "user-role"}
+                            >
+                                {chatMessage.role === "user" ? "" : <img
+                                    src={chatbot}
+                                    alt="chatbot"
+                                    className="chatbot-image"
+                                />}
+                                <span>{chatMessage.content}</span><br />
+                                {chatMessage.image && <img src={chatMessage.image} className="img-view" alt="img" />}
+                                {chatMessage.type === "audio" && <audio src={chatMessage.audio} controls />}
+                            </div>
+
+                            {index === 0 && (<>
+                                <div className="questions-container">
+                                    <span className="questions"><button onClick={handleClickQuestion1} className={showQuestion}>{question1}</button></span>
+                                    <span className="questions"><button onClick={handleClickQuestion2} className={showQuestion}>{question2} </button></span>
+                                    <span className="questions"><button onClick={handleClickQuestion3} className={showQuestion}>{question3}</button></span>
+                                </div>
+                            </>
+                            )}
+                            <br></br>
                         </div>
-
-                        {index === 0 && (<>
-                            <div className="questions-container">
-                                <span className="questions"><button onClick={handleClickQuestion1} className={showQuestion}>{question1}</button></span>
-                                <span className="questions"><button onClick={handleClickQuestion2} className={showQuestion}>{question2} </button></span>
-                                <span className="questions"><button onClick={handleClickQuestion3} className={showQuestion}>{question3}</button></span>
-                            </div>
-                        </>
-                        )}
-                        <br></br>
-                    </div>
-                )) : (<>
-                    <Content messages={messages} /> <br /><div ref={messagesEndRef} />
-                </>)}
-                <br />
-            </div>
-            <div className="endRef" ref={messagesEndRef} />
+                    )) : (<>
+                        <Content messages={messages} /> <br /><div ref={messagesEndRef} />
+                    </>)}
+                    <br />
+                </div>
+                <div className="endRef" ref={messagesEndRef} />
 
 
-            <div className="inputContainer">
-                <form className="formulario" onSubmit={getMessages}>
-                    <div className="attachContainer">
-                        <img
-                            src={attach}
-                            alt="Attach file"
-                            onClick={() => fileInputRef.current.click()} // Simula un clic en el input de tipo file
-                            className="attachButton"
+                <div className="inputContainer">
+                    <form className="formulario" onSubmit={getMessages}>
+                        <div className="attachContainer">
+                            <img
+                                src={attach}
+                                alt="Attach file"
+                                onClick={() => fileInputRef.current.click()} // Simula un clic en el input de tipo file
+                                className="attachButton"
+                            />
+                        </div>
+                        <input
+                            name="file"
+                            type="file"
+                            style={{ display: 'none' }}
+                            ref={fileInputRef} // Referencia para activar el clic
+                            onChange={handleFileChange}
                         />
-                    </div>
-                    <input
-                        name="file"
-                        type="file"
-                        style={{ display: 'none' }}
-                        ref={fileInputRef} // Referencia para activar el clic
-                        onChange={handleFileChange}
-                    />
-                    <input
-                        name="message"
-                        className={`${isTyping ? 'typing inputText' : 'inputText'}`}
-                        value={isTyping ? "Buscando en mi base de conocimiento..." : input}
-                        onChange={(e) => setInput(e.target.value)}
-                        placeholder="Preguntale a MegaBot..."
+                        <input
+                            name="message"
+                            className={`${isTyping ? 'typing inputText' : 'inputText'}`}
+                            value={isTyping ? "Buscando en mi base de conocimiento..." : input}
+                            onChange={(e) => setInput(e.target.value)}
+                            placeholder="Preguntale a MegaBot..."
 
-                    />
-                    {filesPreviews && <img src={filesPreviews} className="img-preview" alt="img" />}
+                        />
+                        {filesPreviews && <img src={filesPreviews} className="img-preview" alt="img" />}
 
-                    <button type="submit" className={input || mediaBlobUrl ? "submitButton" : "submitButtonWithNoInput"} disabled={!input && !mediaBlobUrl}>
-                        {/* <img alt="send" src={send} className="img-button" /> */}
-                    </button>
+                        <button type="submit" className={input || mediaBlobUrl ? "submitButton" : "submitButtonWithNoInput"} disabled={!input && !mediaBlobUrl}>
+                            {/* <img alt="send" src={send} className="img-button" /> */}
+                        </button>
 
-                    <div className="audio-recorder-container">
-                        {status === "recording" ?
-                            <div>
-                                <audio src={mediaBlobUrl} controls />
-                                <div className="pauseContainer">
-                                    <button>
-                                        <img src={pause} alt="pause" onClick={pauseRecording} />
-                                    </button>
-                                </div>
-                                <div className="recordContainer">
-                                    <button>
-                                        <img src={record} alt="record" onClick={stopRecording} />
-                                    </button>
-                                </div>
-                            </div>
-                            : status === "paused" ?
+                        <div className="audio-recorder-container">
+                            {status === "recording" ?
                                 <div>
                                     <audio src={mediaBlobUrl} controls />
-                                    <div className="resumeContainer">
+                                    <div className="pauseContainer">
                                         <button>
-                                            <img src={microphone} alt="micro" onClick={resumeRecording} />
+                                            <img src={pause} alt="pause" onClick={pauseRecording} />
                                         </button>
                                     </div>
                                     <div className="recordContainer">
@@ -310,34 +303,48 @@ const MegaBot = () => {
                                         </button>
                                     </div>
                                 </div>
-                                : status === "stopped" ?
-                                    <div >
-                                        <div className="trashContainer">
-                                            <button>
-                                                <img src={trash} alt="trash" onClick={clearBlobUrl} />
-                                            </button>
-                                        </div>
+                                : status === "paused" ?
+                                    <div>
                                         <audio src={mediaBlobUrl} controls />
-                                        <div className="sendContainer">
+                                        <div className="resumeContainer">
                                             <button>
-                                                <img src={send} alt="send" onClick={getMessages} />
+                                                <img src={microphone} alt="micro" onClick={resumeRecording} />
+                                            </button>
+                                        </div>
+                                        <div className="recordContainer">
+                                            <button>
+                                                <img src={record} alt="record" onClick={stopRecording} />
                                             </button>
                                         </div>
                                     </div>
-                                    : <div className="sendContainer">
-                                        <button>
-                                            <img src={microphone} alt="micro" onClick={startRecording} />
-                                        </button>
-                                    </div>
-                        }
+                                    : status === "stopped" ?
+                                        <div >
+                                            <div className="trashContainer">
+                                                <button>
+                                                    <img src={trash} alt="trash" onClick={clearBlobUrl} />
+                                                </button>
+                                            </div>
+                                            <audio src={mediaBlobUrl} controls />
+                                            <div className="sendContainer">
+                                                <button>
+                                                    <img src={send} alt="send" onClick={getMessages} />
+                                                </button>
+                                            </div>
+                                        </div>
+                                        : <div className="sendContainer">
+                                            <button>
+                                                <img src={microphone} alt="micro" onClick={startRecording} />
+                                            </button>
+                                        </div>
+                            }
+                        </div>
+                    </form>
+                    <div className="broomContainer">
+                        <img src={broom} alt="broom" className="broom" onClick={resetMessages} />
                     </div>
-                </form>
-                <div className="broomContainer">
-                    <img src={broom} alt="broom" className="broom" onClick={resetMessages} />
                 </div>
             </div>
-        </div>
-    );
-};
+        );
+    };
 
-export default MegaBot;
+    export default MegaBot;
