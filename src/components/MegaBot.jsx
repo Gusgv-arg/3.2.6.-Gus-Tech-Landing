@@ -163,7 +163,7 @@ const MegaBot = () => {
                 data = { id: messageId, role: "assistant", type: "audio", audio: audioUrl, displayed: false };
             } else {
                 messageId = Date.now().toString(); // Generate a unique ID for the message
-                data = { id: messageId, role: "assistant", type: "text", content: response.data, displayed: false };
+                data = { id: messageId, role: "assistant", type: "text", content: response?.data?.content ? response.data.content : response.data, displayed: false };
 
             }
 
