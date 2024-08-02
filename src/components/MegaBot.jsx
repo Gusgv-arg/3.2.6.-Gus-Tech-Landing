@@ -317,25 +317,25 @@ const MegaBot = () => {
                                             </button>
                                         </div>
                                     </div>
-                                    : status === "stopped" ?
-                                        <div >
-                                            <div className="trashContainer">
-                                                <button>
-                                                    <img src={trash} alt="trash" onClick={clearBlobUrl} />
-                                                </button>
-                                            </div>
-                                            <audio src={mediaBlobUrl} controls />
-                                            <div className="sendContainer">
-                                                <button>
-                                                    <img src={send} alt="send" onClick={getMessages} />
-                                                </button>
-                                            </div>
-                                        </div>
-                                        : <div className="sendContainer">
+                                : status === "stopped" ?
+                                    <div >
+                                        <div className="trashContainer">
                                             <button>
-                                                <img src={microphone} alt="micro" onClick={startRecording} />
+                                                <img src={trash} alt="trash" onClick={clearBlobUrl} />
                                             </button>
                                         </div>
+                                            <audio src={mediaBlobUrl} controls />
+                                        <div className="sendContainer">
+                                            <button>
+                                                <img src={send} alt="send" onClick={getMessages} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                :   <div className="sendContainer">
+                                        <button>
+                                            <img src={microphone} alt="micro" onClick={startRecording} />
+                                        </button>
+                                    </div>
                             }
                         </div>
                     </form>
