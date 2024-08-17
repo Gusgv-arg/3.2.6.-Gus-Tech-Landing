@@ -5,7 +5,7 @@
 .contactos {
 	display: flex;
 	justify-content: left;
-	margin: 1rem 3rem 0 6rem;
+	margin: 0.8rem 3rem 0 6rem;
 	font-size: 0.8rem;
 	align-items: center;
 	font-weight: bold;
@@ -34,18 +34,16 @@
 	height: 1.1rem;	
 }
 .facebook{
-	height: 1rem;
-	
+	height: 1rem;	
 }
 .reunionContainer{
 	display: flex;
-	margin: 0.5rem 0 0 0;
+	margin: 0.3rem 0 0 0;
 }
 .textReunion {
 	font-size: 0.8rem;
 	font-weight: bold;
-	margin-right: 0.5rem;
-	
+	margin-right: 0.5rem;	
 }
 
 @media (max-width: 700px) {
@@ -73,6 +71,10 @@
 		margin: 1rem 0.5rem 0rem 3rem;		
 	}
 	.textReunion{
-		font-size: 0.7rem;		
+		font-size: 0.7rem;
+		margin-top: 0.05rem		
+	}
+	.meeting {
+		margin-top: 0rem
 	}
 }
