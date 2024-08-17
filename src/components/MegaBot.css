@@ -310,7 +310,6 @@
 
 @media (width<700px) {
 	.chat-container {
-		width: 320px;
 		width: 270px;
 		height: 580px;
 		/* background-color: rgb(193, 154, 97); */
