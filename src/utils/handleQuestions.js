@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const baseURL = process.env.REACT_APP_API_URL_PROD ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_LOCAL;
+console.log("baseurl desde handleQuestions", baseURL)
 
 export const handleQuestions = async (
 	idUser,
@@ -28,7 +29,7 @@ export const handleQuestions = async (
 		data.displayed = false;
 		return data;
 	} catch (error) {
-		console.log(error);
+		console.log("Error desde handleQuestions:", error.message);
 		const errorMessage = {
 			role: "assistant",
 			content:

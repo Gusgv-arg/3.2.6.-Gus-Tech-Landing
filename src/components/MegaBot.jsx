@@ -197,7 +197,7 @@ const MegaBot = () => {
                 } else {
                     errorMessage = {
                         role: "assistant",
-                        content: "¡Disculpas! Estamos haciendo modificaciones y por el momento no puedo procesar tu mensaje. Por favor intentá más tarde.",
+                        content: "¡Disculpas! Estamos haciendo modificaciones y por el momento no puedo procesar tu mensaje. Por favor intentá más tarde. ¡Muchas gracias!",
                         displayed: false
                     };
                 }
