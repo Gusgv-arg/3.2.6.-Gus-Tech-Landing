@@ -32,9 +32,10 @@ export const handleQuestions = async (
 		const errorMessage = {
 			role: "assistant",
 			content:
-				"¡Disculpas, hubo un error, por favor intentá más tarde! ¡Gracias!",
+				"¡Disculpas, estamos haciendo modificaciones! Por favor intentá más tarde. ¡Gracias!",
 			displayed: false,
 		};
+		
 		return errorMessage;
 	}
 };
