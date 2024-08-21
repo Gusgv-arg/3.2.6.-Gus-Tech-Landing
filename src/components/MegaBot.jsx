@@ -191,13 +191,13 @@ const MegaBot = () => {
                 } else if (error.code === "ECONNABORTED") {
                     errorMessage = {
                         role: "assistant",
-                        content: "¡Disculpas! Interrumpí el proceso porque el servidor está muy lento. Por favor volvé a intentar.",
+                        content: "¡Disculpas! Interrumpí el proceso porque el servidor está muy lento. Por favor volvé a intentar más tarde.",
                         displayed: false
                     };
                 } else {
                     errorMessage = {
                         role: "assistant",
-                        content: "Lo siento, hubo un error al procesar tu mensaje. Por favor intenta nuevamente.",
+                        content: "¡Disculpas! Estamos haciendo modificaciones y por el momento no puedo procesar tu mensaje. Por favor intentá más tarde.",
                         displayed: false
                     };
                 }
