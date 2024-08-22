@@ -5,6 +5,7 @@ import facebook from "../assets/Facebook.svg"
 import instagram from "../assets/Instagram.svg"
 import discord from "../assets/Discord.svg"
 import linkedin from "../assets/Linkedin.svg"
+import tweeter from "../assets/Tweeter.svg"
 import calendar from "../assets/FlatTearOffCalendar.svg"
 import { Link } from "react-router-dom"
 
@@ -42,6 +43,11 @@ export const Footer = () => {
                 <div>
                     <a href="http://linkedin.com/in/gustavo-gomez-villafañe-6164526" target="_blank" rel="noreferrer" >
                         <img src={linkedin} alt="linkedin" className="linkedin" />
+                    </a>
+                </div>
+                <div>
+                    <a href="https://x.com/gus_tech_gv" target="_blank" rel="noreferrer" >
+                        <img src={tweeter} alt="tweeter" className="tweeter" />
                     </a>
                 </div>
             </div>
