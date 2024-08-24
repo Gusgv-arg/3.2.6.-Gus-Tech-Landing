@@ -1,6 +1,7 @@
 .footerContainer {
 	display: flex;
-	align-items: center;
+	align-items: center;	
+	align-content: center;	
 }
 .contactos {
 	display: flex;
@@ -8,12 +9,11 @@
 	margin: 0.8rem 3rem 0 6rem;
 	font-size: 0.8rem;
 	align-items: center;
-	font-weight: bold;
-	padding-bottom: 10px;
+	font-weight: bold;	
 }
-.text {
-	margin-bottom: 0.3rem;
+.text {	
 	margin-right: 0.51rem;	
+	margin-bottom: 0.3rem
 }
 .contactos a {
 	padding: 9px;
@@ -31,31 +31,35 @@
 	height: 1.3rem;
 }
 .meeting {
-	height: 1.1rem;	
+	height: 1.1rem;
+	margin-top: 0.4rem	
 }
 .facebook{
 	height: 1rem;	
 }
 .reunionContainer{
 	display: flex;
-	margin: 0.3rem 0 0 0;
+	align-items: center;
+	
 }
 .textReunion {
 	font-size: 0.8rem;
 	font-weight: bold;
-	margin-right: 0.5rem;	
+	margin-right: 0.5rem;
+	
 }
 
 @media (max-width: 700px) {
 	.footerContainer{
 		display: block;
 		margin-top:3rem;
+		box-sizing: border-box; 
 	}
 	.contactos {
 		display: flex;
 		background-color: transparent; 
-		width: 350px;
-		margin: 1rem 0.5rem 0rem 3rem;
+		width: 320px;
+		margin: 1rem 0rem 0rem 1rem;
 		padding: 1px;
 	}
 	.contactos a {
@@ -71,11 +75,15 @@
 		font-weight: bold;
 	}
 	.reunionContainer{	
-		margin: 1rem 0.5rem 0rem 3rem;		
+		margin: 0.4rem 0rem 0rem 1rem;		
+		box-sizing: border-box; 
+		display: flex;
+		justify-content: left;
 	}
 	.textReunion{
 		font-size: 0.7rem;
-		margin-top: 0.05rem		
+		margin-top: 0.05rem;		
+		
 	}
 	.meeting {
 		margin-top: 0rem

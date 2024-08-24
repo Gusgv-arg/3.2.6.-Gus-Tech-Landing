@@ -16,8 +16,7 @@ export const HomeScreen = () => {
 				/>
 			</div>
 			<div>				
-				<MegaBot/>				
-				  				
+				<MegaBot/>				  				
 			</div>
 		</div>
 	)
