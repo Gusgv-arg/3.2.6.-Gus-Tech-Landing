@@ -7,6 +7,13 @@
     margin: 0rem 6rem; 
 	height: 78vh 	/* Poner en 78 para que no se mueva */
 }
+.loading {
+	padding: 80px;
+}
+.loader {
+	height: 25px;
+	margin-top: 15px	
+}
 .image{	
 	aspect-ratio: 1/1;
 	width: 30vw;
