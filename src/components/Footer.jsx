@@ -21,7 +21,7 @@ export const Footer = () => {
                         </a>
                     </div>
                     <div>
-                        <a href="https://wa.me/5491161405589" target="_blank" rel="noreferrer">
+                        <a href="https://wa.me/5491123429504" target="_blank" rel="noreferrer">
                             <img src={whatsapp} alt="whatsapp" className="whatsapp" />
                         </a>
                     </div>
@@ -31,9 +31,10 @@ export const Footer = () => {
                         </a>
                     </div>
                     <div>
-                        <Link to="/proximamente" >
+                        {/* <Link to="/proximamente" >
                             <img src={instagram} alt="instagram" className="instagram" />
-                        </Link>
+                        </Link> */}
+                        <a href="https://www.instagram.com/gus_tech_gv/" target="_blank" rel="noreferrer"><img src={instagram} alt="instagram" className="instagram" /></a>
                     </div>
                     <div>
                         <a href="https://discord.com/accessibility/#0958" target="_blank" rel="noreferrer" >

@@ -11,10 +11,17 @@ const baseURL = process.env.REACT_APP_API_URL_PROD ? process.env.REACT_APP_API_U
 // Función para "despertar" el servidor usando Axios
 const wakeUpServer = async () => {
 	try {
+		console.log('Intentando conectar con:', baseURL);
 		const response = await axios.get(baseURL);
-		console.log(response.data);
+		console.log('Servidor despierto:', response.data);
+		return response.data;
 	} catch (error) {
-		console.error('Error al despertar el servidor:', error);
+		console.error('Error al despertar el servidor:', {
+			message: error.message,
+			status: error.response?.status,
+			baseURL: baseURL
+		});
+		throw error; // Propagamos el error para manejarlo en el componente
 	}
 };
 
@@ -23,15 +30,36 @@ export const HomeScreen = () => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		// Awaques server
-		wakeUpServer();
+		const initializeApp = async () => {
+			const lastLoadingTime = localStorage.getItem('lastLoadingTime');
+			const currentTime = Date.now();
 
-		// Simulation of time needed to wake up the server.
-		const timer = setTimeout(() => {
-			setIsLoading(false);
-		}, 20000);
+			// Si ya se mostró la pantalla de carga en los últimos 10 minutos
+			if (lastLoadingTime && (currentTime - parseInt(lastLoadingTime)) < 10 * 60 * 1000) {
+				console.log("Carga reciente, saltando pantalla de carga");
+				setIsLoading(false);
+				return;
+			}
 
-		return () => clearTimeout(timer);
+			try {
+				// Intentamos despertar el servidor
+				console.log('Despertando servidor...');
+				await wakeUpServer();
+
+				// Guardamos el tiempo de carga
+				localStorage.setItem('lastLoadingTime', currentTime.toString());
+
+				// Esperamos un tiempo razonable para que el usuario pueda leer el mensaje
+				setTimeout(() => {
+					setIsLoading(false);
+				}, 20000); // 20 segundos
+			} catch (error) {
+				console.error('Error durante la inicialización:', error);
+				setIsLoading(false); // En caso de error, mostramos la interfaz principal
+			}
+		};
+
+		initializeApp();
 	}, []);
 
 	if (isLoading) {
@@ -39,9 +67,9 @@ export const HomeScreen = () => {
 			<div className="homeContainer">
 				<div className="loading">
 					<p><strong>¡Hola bienvenido a Gus-Tech!</strong></p><br />
-					<p>Mientras conecto mis cables para ofrecer un buen servicio, le cuento sobre la empresa. En www.gus-tech.com nos especializamos en la utilización de Agentes impulsados por Inteligencia Artificial. Estos agentes siempre son previamente entrenados con la información y herramientas específicas necesarias para realizar las tareas deseadas.</p><br />
-					<p>Con el avance de esta tecnología, las posibilidades son muchas y podríamos decir que se limitan a la imaginación de cada uno. Cosas que hace pocos años atrás parecían impensadas, hoy estamos entrando en una era en donde nuestra interacción con la información se hará de una manera mucho más natural y sencilla.</p><br />
-					<p>A continuación podrá intercactuar con MegaBot, nuestro Asistente entrenado para responder a sus preguntas sobre las múltiples posibilidades de aplicación para su caso de uso específico.</p><br />
+					<p>Mientras conecto mis cables para ofrecer un buen servicio, le cuento sobre la empresa. En www.gus-tech.com nos especializamos en el desarrollo de Agentes impulsados por Inteligencia Artificial. Estos agentes son previamente entrenados con la información de su empresa y pueden ser provistos de herramientas para realizar las tareas específicas que usted desee.</p><br />
+					<p>A continuación lo invito a intercactuar con MegaBot, nuestro Asistente entrenado para responder a sus preguntas sobre las múltiples posibilidades de aplicación para su caso de uso específico.</p><br />
+					<p>También podrá probarlo por WhatsApp, Facebook Messenger e Instagram Messenger.</p><br />
 					<p>¡Esperamos poder trabajar juntos!</p>
 					<span>
 						<img
